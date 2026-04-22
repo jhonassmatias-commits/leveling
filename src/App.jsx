@@ -82,7 +82,7 @@ const DEFAULT_CONCURSO = {
   subjects:[
     {id:"port",  name:"Língua Portuguesa",       icon:"📝", color:"#60a5fa"},
     {id:"logica",name:"Raciocínio Lógico",       icon:"🧩", color:"#a78bfa"},
-    {id:"matfin",name:"Matemática Financeira",   icon:"📊", color:"#34d399"},
+    {id:"matfin",name:"Matemática,   icon:"📊", color:"#34d399"},
     {id:"banc",  name:"Conhecimentos Bancários", icon:"🏦", color:"#f59e0b"},
     {id:"atual", name:"Atualidades do Mercado",  icon:"📰", color:"#f97316"},
     {id:"info",  name:"Informática",             icon:"💻", color:"#22d3ee"},
