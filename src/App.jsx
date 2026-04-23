@@ -293,16 +293,23 @@ export default function App(){
     })();
   },[]);
 
-  useEffect(()=>{
-    if(!timerOn) return;
-    const iv=setInterval(()=>setElapsed(e=>{
-      const ne=e+1;
-      if(ne===3600&&!m1.current){m1.current=true;autoQuest("study_1h",30);}
-      if(ne===7200&&!m2.current){m2.current=true;autoQuest("study_2h",25);}
-      return ne;
-    }),1000);
-    return()=>clearInterval(iv);
-  },[timerOn]);
+    useEffect(() => {
+    let interval;
+    if (timerOn) {
+      interval = setInterval(() => {
+        const start = localStorage.getItem("jhonas_timer_start");
+        if (start) {
+          // Calcula a diferença real entre "agora" e "quando começou"
+          const elapsed = Math.floor((Date.now() - parseInt(start)) / 1000);
+          setSeconds(elapsed);
+        }
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [timerOn]);
+
 
   const addFloat=useCallback((xp)=>{
     const id=Date.now()+Math.random();
@@ -372,19 +379,29 @@ export default function App(){
     const nc={...char,totalXP:newXP};charRef.current=nc;setChar(nc);addFloat(delta);await save(nc,null,newP);
   };
 
-  const startTimer=(s)=>{if(timerOn)return;m1.current=false;m2.current=false;setTimerSub(s);setElapsed(0);setTimerOn(true);};
-  const stopTimer=async()=>{
-    if(!timerOn||!timerSub) return;setTimerOn(false);
-    const mins=Math.floor(elapsed/60);if(mins<1){setElapsed(0);setTimerSub(null);return;}
-    const c=charRef.current;
-    const concs=c.concursos.map(cc=>{if(cc.id!==c.activeConcurso)return cc;
-      const sm={...(cc.subjectMin||{}),[timerSub]:((cc.subjectMin||{})[timerSub]||0)+mins};
-      return {...cc,subjectMin:sm,studySessions:[{date:todayStr(),subject:timerSub,minutes:mins},...(cc.studySessions||[])].slice(0,40)};});
-    const nc={...c,concursos:concs,boss:{...c.boss,studyMin:(c.boss.studyMin||0)+mins}};
-    charRef.current=nc;setChar(nc);await save(nc,null,null);
-    setElapsed(0);setTimerSub(null);m1.current=false;m2.current=false;showToast(`Sessão salva: ${fmtHM(mins)}`,"#60a5fa");
+    const startTimer = () => {
+    if (!selectedSub) return;
+    // Salva o horário de início exato no aparelho
+    localStorage.setItem("jhonas_timer_start", Date.now().toString());
+    setTimerOn(true);
   };
-
+    useEffect(() => {
+    let interval;
+    if (timerOn) {
+      interval = setInterval(() => {
+        const start = localStorage.getItem("jhonas_timer_start");
+        if (start) {
+          // Calcula a diferença real entre "agora" e "quando começou"
+          const elapsed = Math.floor((Date.now() - parseInt(start)) / 1000);
+          setSeconds(elapsed);
+        }
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [timerOn]);
+  
   const getPlans=()=>char?.workoutPlans||DEFAULT_PLANS;
 
   // ── WORKOUT EDITOR ──
