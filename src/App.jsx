@@ -92,9 +92,7 @@ const DEFAULT_CONCURSO = {
   ],
   subjectMin:{}, questions:{}, studySessions:[],
 };
-id:"eng.mecanica", name:"engenharia mecânica", active:true,
-  subjects:[
-   {id:"fis",    name:"Física",                  icon:"📊", color:"#34d399"},
+
 const QUESTS = [
   {id:"study_1h",label:"Estudar 1 hora",   xp:30,icon:"📚",cat:"mente",     core:true},
   {id:"study_2h",label:"Estudar 2ª hora",  xp:25,icon:"📖",cat:"mente",     req:"study_1h"},
