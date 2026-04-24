@@ -88,6 +88,7 @@ const DEFAULT_CONCURSO = {
     {id:"info",  name:"Informática",             icon:"💻", color:"#22d3ee"},
     {id:"ing",   name:"Inglês",                  icon:"🌎", color:"#ec4899"},
     {id:"redac", name:"Redação",                 icon:"✍️", color:"#84cc16"},
+    {id:"fis",   name:"física",                  icon:"📚", color:"#8b5cf6"},
   ],
   subjectMin:{}, questions:{}, studySessions:[],
 };
