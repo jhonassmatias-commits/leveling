@@ -82,17 +82,19 @@ const DEFAULT_CONCURSO = {
   subjects:[
     {id:"port",  name:"Língua Portuguesa",       icon:"📝", color:"#60a5fa"},
     {id:"logica",name:"Raciocínio Lógico",       icon:"🧩", color:"#a78bfa"},
-    {id:"matfin",name:"Matemática Financeira",   icon:"📊", color:"#34d399"},
+    {id:"mat",   name:"Matemática",              icon:"📊", color:"#34d399"},
     {id:"banc",  name:"Conhecimentos Bancários", icon:"🏦", color:"#f59e0b"},
     {id:"atual", name:"Atualidades do Mercado",  icon:"📰", color:"#f97316"},
     {id:"info",  name:"Informática",             icon:"💻", color:"#22d3ee"},
     {id:"ing",   name:"Inglês",                  icon:"🌎", color:"#ec4899"},
     {id:"redac", name:"Redação",                 icon:"✍️", color:"#84cc16"},
-    {id:"fis",   name:"física",                  icon:"📚", color:"#8b5cf6"},
+    {id:"fis",   name:"Física",                  icon:"📚", color:"#8b5cf6"},
   ],
   subjectMin:{}, questions:{}, studySessions:[],
 };
-
+id:"eng.mecanica", name:"engenharia mecânica", active:true,
+  subjects:[
+   {id:"fis",    name:"Física",                  icon:"📊", color:"#34d399"},
 const QUESTS = [
   {id:"study_1h",label:"Estudar 1 hora",   xp:30,icon:"📚",cat:"mente",     core:true},
   {id:"study_2h",label:"Estudar 2ª hora",  xp:25,icon:"📖",cat:"mente",     req:"study_1h"},
