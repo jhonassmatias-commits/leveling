@@ -923,7 +923,7 @@ export default function App(){
     <div style={{background:"#07070f",height:"100vh",width:"100vw",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:14}}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600&display=swap');`}</style>
       <div style={{fontSize:48}}>⚔️</div>
-      <div style={{color:"#f0c040",fontFamily:"Cinzel,serif",fontSize:13,letterSpacing:4}}>RPG DA VIDA REAL</div>
+      <div style={{color:"#f0c040",fontFamily:"Cinzel,serif",fontSize:13,letterSpacing:4}}>YOUR ROUTINE</div>
     </div>
   );
 
