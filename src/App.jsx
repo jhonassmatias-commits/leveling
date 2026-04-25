@@ -310,6 +310,10 @@ export default function App(){
   const [lvlUpMsg,setLvlUp]=useState(null);
   const [toast,setToast]=useState(null);
   const [achPopup,setAchPopup]=useState(null); // newly unlocked achievement
+  const [firstAccess,setFirstAccess]=useState(false);
+  const [onboardName,setOnboardName]=useState("");
+  const [onboardAvatar,setOnboardAvatar]=useState({skin:0,hair:0,hairStyle:"short",expression:"happy"});
+  const importRef=useRef(null);
 
   const [studyTab,setStudyTab]=useState("timer");
   const [bodyTab,setBodyTab]=useState("treino");
@@ -464,6 +468,8 @@ export default function App(){
       setChar(loaded);setQuests(q||{});setPens(p||{});
       const ac=loaded.concursos?.find(c2=>c2.id===loaded.activeConcurso);
       if(ac?.subjects?.length) setQSub(ac.subjects[0].id);
+      // Show onboarding if truly new user (no saved data)
+      if(!c) setFirstAccess(true);
       setLoading(false);
     })();
   },[]);
@@ -851,8 +857,58 @@ export default function App(){
     showToast("Backup exportado!","#22c55e");
   };
 
-  // ── NOTIFICATIONS ──
-  const requestNotif=async()=>{
+  // ── IMPORT BACKUP ──
+  const importData=(e)=>{
+    const file=e.target.files?.[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=(ev)=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        if(!data.totalXP&&data.totalXP!==0) throw new Error("Arquivo inválido");
+        // migrate just in case
+        let books=data.books||{reading:[],library:[]};
+        if(books.current!==undefined) books={reading:books.current?[books.current]:[],library:books.library||[]};
+        if(!books.reading) books.reading=[];
+        if(!books.library) books.library=[];
+        const concursos=(data.concursos||[DEFAULT_CONCURSO]).map(cc=>({
+          ...cc,
+          subjects:cc.subjects&&cc.subjects.length>0?cc.subjects:DEFAULT_SUBJECTS,
+          subjectMin:cc.subjectMin||{},questions:cc.questions||{},studySessions:cc.studySessions||[],
+        }));
+        const restored={...START,...data,
+          stats:{...START.stats,...(data.stats||{})},
+          finance:{salary:data.finance?.salary||800,expenses:data.finance?.expenses||START.finance.expenses},
+          streak:{...START.streak,...(data.streak||{})},
+          boss:{...START.boss,...(data.boss||{})},
+          books,concursos,
+          avatar:data.avatar||START.avatar,body:data.body||START.body,
+          workoutPlans:data.workoutPlans||null,
+          runs:data.runs||[],workoutLog:data.workoutLog||[],
+          unlockedAch:data.unlockedAch||[],questionLog:data.questionLog||[],
+          habits:data.habits||[],moodLog:data.moodLog||[],
+          simulados:data.simulados||[],studyGoals:data.studyGoals||{},xpHistory:data.xpHistory||[],
+        };
+        setChar(restored);
+        save(restored,null,null);
+        showToast(`✅ Backup de ${data.username||"Jogador"} restaurado!`,"#22c55e");
+        setFirstAccess(false);
+      } catch(err){
+        showToast("Arquivo inválido ou corrompido","#ef4444");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value="";
+  };
+
+  // ── ONBOARDING ──
+  const finishOnboarding=async()=>{
+    if(!onboardName.trim()) return;
+    const nc={...char,username:onboardName.trim(),avatar:onboardAvatar};
+    charRef.current=nc;setChar(nc);await save(nc,null,null);
+    setFirstAccess(false);
+    showToast(`Bem-vindo, ${onboardName.trim()}! ⚔️`,"#f0c040");
+  };
     if(!("Notification" in window)){showToast("Notificações não suportadas","#ef4444");return;}
     const p=await Notification.requestPermission();
     if(p==="granted"){showToast("Notificações ativadas! ✓","#22c55e");}
@@ -867,6 +923,65 @@ export default function App(){
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600&display=swap');`}</style>
       <div style={{fontSize:48}}>⚔️</div>
       <div style={{color:"#f0c040",fontFamily:"Cinzel,serif",fontSize:13,letterSpacing:4}}>RPG DA VIDA REAL</div>
+    </div>
+  );
+
+  // ── ONBOARDING SCREEN ──
+  if(firstAccess) return(
+    <div style={{background:"#07070f",height:"100vh",width:"100vw",display:"flex",flexDirection:"column",overflow:"hidden"}}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600&display=swap');*{box-sizing:border-box;margin:0;padding:0}html,body,#root{height:100%;width:100%}.inp{background:#0f0f1e;border:1px solid #2a2848;border-radius:8px;color:#e8dfc0;font-family:Crimson Text,serif;font-size:15px;padding:10px 14px;width:100%;outline:none}.inp:focus{border-color:#f0c04066}@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}`}</style>
+      <div style={{flex:1,overflowY:"auto",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"24px 20px",gap:0}}>
+        <div style={{animation:"fadeIn 0.5s ease",width:"100%",maxWidth:400}}>
+          {/* Header */}
+          <div style={{textAlign:"center",marginBottom:28}}>
+            <div style={{fontSize:52,marginBottom:10}}>⚔️</div>
+            <div style={{fontFamily:"Cinzel,serif",fontSize:20,fontWeight:900,color:"#f0c040",letterSpacing:3,marginBottom:6}}>RPG DA VIDA REAL</div>
+            <div style={{fontSize:13,color:"#555",fontFamily:"Cinzel,serif",letterSpacing:1}}>Sua jornada começa aqui</div>
+          </div>
+
+          {/* Avatar preview */}
+          <div style={{textAlign:"center",marginBottom:20}}>
+            <AvatarSVG {...onboardAvatar} size={80}/>
+          </div>
+
+          {/* Name input */}
+          <div style={{marginBottom:14}}>
+            <div style={{fontFamily:"Cinzel,serif",fontSize:9,color:"#555",letterSpacing:3,marginBottom:6}}>SEU NOME DE GUERREIRO</div>
+            <input className="inp" value={onboardName} onChange={e=>setOnboardName(e.target.value)} placeholder="Como quer ser chamado?" style={{fontSize:16,padding:"12px 14px",textAlign:"center"}} autoFocus/>
+          </div>
+
+          {/* Avatar customization */}
+          <div style={{background:"#0f0f1e",border:"1px solid #1a1838",borderRadius:12,padding:"14px",marginBottom:14}}>
+            <div style={{fontFamily:"Cinzel,serif",fontSize:9,color:"#555",letterSpacing:3,marginBottom:10}}>PERSONALIZAR AVATAR</div>
+            <div style={{fontSize:9,color:"#444",marginBottom:5}}>Expressão</div>
+            <div style={{display:"flex",gap:8,marginBottom:10,justifyContent:"center"}}>{AVATAR_EXPRESSIONS.map(e=><button key={e.id} onClick={()=>setOnboardAvatar(a=>({...a,expression:e.id}))} style={{fontSize:22,background:"none",border:"none",cursor:"pointer",opacity:onboardAvatar.expression===e.id?1:0.3}}>{e.l}</button>)}</div>
+            <div style={{fontSize:9,color:"#444",marginBottom:5}}>Tom de pele</div>
+            <div style={{display:"flex",gap:8,marginBottom:10,justifyContent:"center"}}>{AVATAR_SKINS.map((s,i)=><button key={i} onClick={()=>setOnboardAvatar(a=>({...a,skin:i}))} style={{width:26,height:26,borderRadius:"50%",background:s,border:`3px solid ${onboardAvatar.skin===i?"#f0c040":"transparent"}`,cursor:"pointer"}}/>)}</div>
+            <div style={{fontSize:9,color:"#444",marginBottom:5}}>Cabelo</div>
+            <div style={{display:"flex",gap:8,marginBottom:6,justifyContent:"center"}}>{AVATAR_HAIRS.map((h,i)=><button key={i} onClick={()=>setOnboardAvatar(a=>({...a,hair:i}))} style={{width:22,height:22,borderRadius:"50%",background:h,border:`3px solid ${onboardAvatar.hair===i?"#f0c040":"transparent"}`,cursor:"pointer"}}/>)}</div>
+            <div style={{display:"flex",gap:6,justifyContent:"center"}}>{AVATAR_HAIR_STYLES.map(s=><button key={s.id} onClick={()=>setOnboardAvatar(a=>({...a,hairStyle:s.id}))} style={{padding:"4px 10px",borderRadius:7,border:`1px solid ${onboardAvatar.hairStyle===s.id?"#f0c04066":"#2a2848"}`,background:onboardAvatar.hairStyle===s.id?"#1a1400":"transparent",color:onboardAvatar.hairStyle===s.id?"#f0c040":"#555",fontFamily:"Cinzel,serif",fontSize:9,cursor:"pointer"}}>{s.l}</button>)}</div>
+          </div>
+
+          {/* Start button */}
+          <button onClick={finishOnboarding} disabled={!onboardName.trim()} style={{width:"100%",padding:"14px",borderRadius:12,background:onboardName.trim()?"linear-gradient(135deg,#f0c040,#d4a017)":"#1a1838",border:"none",color:onboardName.trim()?"#000":"#333",fontFamily:"Cinzel,serif",fontSize:14,fontWeight:700,letterSpacing:2,cursor:onboardName.trim()?"pointer":"not-allowed",marginBottom:14,transition:"all 0.2s"}}>
+            ⚔️ INICIAR JORNADA
+          </button>
+
+          {/* Divider */}
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:14}}>
+            <div style={{flex:1,height:1,background:"#1a1838"}}/>
+            <span style={{fontFamily:"Cinzel,serif",fontSize:9,color:"#333",letterSpacing:2}}>OU</span>
+            <div style={{flex:1,height:1,background:"#1a1838"}}/>
+          </div>
+
+          {/* Import backup */}
+          <input ref={importRef} type="file" accept=".json" onChange={importData} style={{display:"none"}}/>
+          <button onClick={()=>importRef.current?.click()} style={{width:"100%",padding:"12px",borderRadius:12,background:"transparent",border:"1px solid #22c55e44",color:"#22c55e",fontFamily:"Cinzel,serif",fontSize:12,letterSpacing:2,cursor:"pointer"}}>
+            📥 RESTAURAR BACKUP
+          </button>
+          <div style={{textAlign:"center",fontSize:10,color:"#333",marginTop:8,fontFamily:"Cinzel,serif"}}>Já tem uma conta? Importe seu arquivo .json</div>
+        </div>
+      </div>
     </div>
   );
 
@@ -1600,11 +1715,14 @@ export default function App(){
               </Card>
             </>}
 
-            {/* Export & Notif */}
-            <div style={{display:"flex",gap:6,marginTop:12}}>
-              <button className="tbtn" onClick={exportData} style={{flex:1,padding:"11px",borderRadius:10,background:"#0a2010",border:"1px solid #22c55e44",color:"#22c55e",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1}}>📥 EXPORTAR BACKUP</button>
-              <button className="tbtn" onClick={requestNotif} style={{flex:1,padding:"11px",borderRadius:10,background:"#0a0a1e",border:"1px solid #60a5fa44",color:"#60a5fa",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1}}>🔔 NOTIFICAÇÕES</button>
+            {/* Export, Import & Notif */}
+            <input ref={importRef} type="file" accept=".json" onChange={importData} style={{display:"none"}}/>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,marginTop:12}}>
+              <button className="tbtn" onClick={exportData} style={{padding:"11px",borderRadius:10,background:"#0a2010",border:"1px solid #22c55e44",color:"#22c55e",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1}}>📤 EXPORTAR</button>
+              <button className="tbtn" onClick={()=>importRef.current?.click()} style={{padding:"11px",borderRadius:10,background:"#0a1a0a",border:"1px solid #22c55e66",color:"#22c55e",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1}}>📥 IMPORTAR</button>
+              <button className="tbtn" onClick={requestNotif} style={{padding:"11px",borderRadius:10,background:"#0a0a1e",border:"1px solid #60a5fa44",color:"#60a5fa",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1,gridColumn:"1/-1"}}>🔔 ATIVAR NOTIFICAÇÕES</button>
             </div>
+            <div style={{marginTop:8,fontSize:9,color:"#333",fontFamily:"Cinzel,serif",textAlign:"center",letterSpacing:1}}>EXPORTAR = baixa backup · IMPORTAR = restaura backup</div>
           </>}
 
           {lifeTab==="perfil"&&<>
