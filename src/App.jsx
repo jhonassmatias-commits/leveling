@@ -114,6 +114,51 @@ const BOSS_POOL=[
   {name:"Semana Imparável",   icon:"👑",desc:"900min + 4 treinos + 50 questões",  xp:300,goals:{studyMin:900,trainCount:4,questions:50}},
 ];
 
+// ── ACHIEVEMENTS ──
+const ACHIEVEMENTS = [
+  // Streak
+  {id:"streak_3",   icon:"🔥", name:"Faísca",          desc:"3 dias seguidos",        cat:"streak",   check:(c)=>(c.streak?.best||0)>=3,    xp:20},
+  {id:"streak_7",   icon:"🔥", name:"Semana de Fogo",  desc:"7 dias seguidos",        cat:"streak",   check:(c)=>(c.streak?.best||0)>=7,    xp:50},
+  {id:"streak_30",  icon:"🔥", name:"Monge do Hábito", desc:"30 dias seguidos",       cat:"streak",   check:(c)=>(c.streak?.best||0)>=30,   xp:150},
+  {id:"streak_100", icon:"⚡", name:"Centenário",      desc:"100 dias seguidos",      cat:"streak",   check:(c)=>(c.streak?.best||0)>=100,  xp:400},
+  // Estudo
+  {id:"study_10h",  icon:"📚", name:"Estudante",       desc:"10 horas de estudo",     cat:"estudo",   check:(c)=>(c.stats?.totalStudyHours||0)>=10,  xp:30},
+  {id:"study_50h",  icon:"📚", name:"Dedicado",        desc:"50 horas de estudo",     cat:"estudo",   check:(c)=>(c.stats?.totalStudyHours||0)>=50,  xp:80},
+  {id:"study_100h", icon:"🧠", name:"Estrategista",    desc:"100 horas de estudo",    cat:"estudo",   check:(c)=>(c.stats?.totalStudyHours||0)>=100, xp:200},
+  {id:"study_500h", icon:"🏆", name:"Einstein",        desc:"500 horas de estudo",    cat:"estudo",   check:(c)=>(c.stats?.totalStudyHours||0)>=500, xp:600},
+  // Questões
+  {id:"q_100",      icon:"🎯", name:"Primeiro Passo",  desc:"100 questões",           cat:"questoes", check:(c)=>(c.stats?.totalQuestions||0)>=100,  xp:30},
+  {id:"q_500",      icon:"🎯", name:"Resoluto",        desc:"500 questões",           cat:"questoes", check:(c)=>(c.stats?.totalQuestions||0)>=500,  xp:80},
+  {id:"q_1000",     icon:"🎯", name:"Mestre das Q.",   desc:"1000 questões",          cat:"questoes", check:(c)=>(c.stats?.totalQuestions||0)>=1000, xp:180},
+  // Treino
+  {id:"train_10",   icon:"💪", name:"Novato do Gym",   desc:"10 treinos completos",   cat:"treino",   check:(c)=>(c.stats?.totalWorkouts||0)>=10,   xp:40},
+  {id:"train_50",   icon:"💪", name:"Veterano",        desc:"50 treinos completos",   cat:"treino",   check:(c)=>(c.stats?.totalWorkouts||0)>=50,   xp:100},
+  {id:"train_100",  icon:"🏋️", name:"Guerreiro Físico",desc:"100 treinos",            cat:"treino",   check:(c)=>(c.stats?.totalWorkouts||0)>=100,  xp:250},
+  // Corrida
+  {id:"run_5km",    icon:"🏃", name:"Maratonista Jr.", desc:"5km numa corrida",       cat:"corrida",  check:(c)=>(c.stats?.prKm||0)>=5,             xp:40},
+  {id:"run_10km",   icon:"🏅", name:"Cooper Elite",    desc:"10km numa corrida",      cat:"corrida",  check:(c)=>(c.stats?.prKm||0)>=10,            xp:100},
+  {id:"run_100km",  icon:"⚡", name:"Usain",           desc:"100km no total",         cat:"corrida",  check:(c)=>(c.stats?.totalKm||0)>=100,        xp:200},
+  // Livros
+  {id:"book_1",     icon:"📖", name:"Leitor",          desc:"1 livro finalizado",     cat:"livros",   check:(c)=>(c.stats?.booksFinished||0)>=1,    xp:30},
+  {id:"book_5",     icon:"📚", name:"Bibliófilo",      desc:"5 livros finalizados",   cat:"livros",   check:(c)=>(c.stats?.booksFinished||0)>=5,    xp:100},
+  // Boss
+  {id:"boss_1",     icon:"👹", name:"Caçador",         desc:"1 boss derrotado",       cat:"boss",     check:(c)=>(c.stats?.bossesCleared||0)>=1,    xp:50},
+  {id:"boss_5",     icon:"👑", name:"Lendário",        desc:"5 bosses derrotados",    cat:"boss",     check:(c)=>(c.stats?.bossesCleared||0)>=5,    xp:200},
+  // Nível
+  {id:"lv_5",       icon:"⬆️", name:"Ascendente",      desc:"Chegou ao nível 5",      cat:"nivel",    check:(c,lv)=>lv>=5,                          xp:50},
+  {id:"lv_10",      icon:"⬆️", name:"Veterano RPG",    desc:"Chegou ao nível 10",     cat:"nivel",    check:(c,lv)=>lv>=10,                         xp:150},
+  {id:"lv_15",      icon:"🌟", name:"Fenômeno",        desc:"Chegou ao nível 15",     cat:"nivel",    check:(c,lv)=>lv>=15,                         xp:400},
+];
+
+// ── MOOD OPTIONS ──
+const MOODS = [
+  {id:"great",  icon:"🔥", label:"Imparável",  color:"#f0c040", xp:5},
+  {id:"good",   icon:"😊", label:"Bem",        color:"#34d399", xp:3},
+  {id:"ok",     icon:"😐", label:"Ok",         color:"#60a5fa", xp:1},
+  {id:"tired",  icon:"😴", label:"Cansado",    color:"#a78bfa", xp:0},
+  {id:"bad",    icon:"😔", label:"Mal",        color:"#ef4444", xp:0},
+];
+
 const AVATAR_SKINS=["#FDBCB4","#F1C27D","#E0AC69","#C68642","#8D5524"];
 const AVATAR_HAIRS=["#1a0a00","#4a2c00","#8B4513","#DAA520","#FF6B6B","#E0E0E0","#2c3e50","#e91e63"];
 const AVATAR_EXPRESSIONS=[{id:"happy",l:"😊"},{id:"focused",l:"😤"},{id:"cool",l:"😎"},{id:"tired",l:"😴"}];
@@ -122,6 +167,8 @@ const PLAN_ICONS=["🏋️","🦾","🦵","🏃","🥊","🤸","⚡","🔥","�
 const PLAN_COLORS=["#ef4444","#60a5fa","#34d399","#f59e0b","#a78bfa","#f97316","#ec4899","#22d3ee","#84cc16","#f0c040"];
 const SUBJECT_ICONS=["📝","🧩","📊","🏦","📰","💻","🌎","✍️","⚖️","🧬","📐","🗺️","🎭","🔬","📜","🧠","💡","🏛️"];
 const SUBJECT_COLORS=["#60a5fa","#a78bfa","#34d399","#f59e0b","#f97316","#22d3ee","#ec4899","#84cc16","#ef4444","#f0c040","#4ecdc4","#fb923c"];
+const HABIT_ICONS=["💧","🧘","🥗","😴","📵","🚶","🎸","✍️","🌅","🛁","💊","🙏","📓","🎯","🧹","🌿"];
+const HABIT_COLORS=["#60a5fa","#34d399","#f59e0b","#a78bfa","#f97316","#22d3ee","#ec4899","#84cc16","#ef4444","#f0c040"];
 
 const RUN_XP=(km)=>km>=10?60:km>=8?48:km>=6?38:km>=4?28:km>=2?18:10;
 const FIN_XP=(v)=>v>=500?40:v>=300?30:v>=100?20:10;
@@ -130,8 +177,8 @@ const catColor={mente:"#60a5fa",corpo:"#ef4444",disciplina:"#a78bfa"};
 // ═══════════════════════════════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════════════════════════════
-const todayStr=()=>new Date().toISOString().slice(0,10);
-const fmtTime=(s)=>{const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sc=s%60;return h?`${h}:${String(m).padStart(2,"0")}:${String(sc).padStart(2,"0")}`:`${String(m).padStart(2,"0")}:${String(sc).padStart(2,"0")}`;};
+const todayStr=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;};
+const yesterdayStr=()=>{const d=new Date();d.setDate(d.getDate()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;};
 const fmtHM=(m)=>!m?"-":m<60?`${m}min`:`${Math.floor(m/60)}h${m%60?` ${m%60}min`:""}`;
 const fmtKm=(k)=>k?(+k).toFixed(1)+"km":"—";
 const pct=(a,b)=>b?Math.round((a/b)*100):0;
@@ -148,9 +195,18 @@ function streakMulti(s){return s>=30?1.25:s>=7?1.10:1;}
 async function sg(k){try{const r=await window.storage.get(k);return r?JSON.parse(r.value):null;}catch{return null;}}
 async function ss(k,v){try{await window.storage.set(k,JSON.stringify(v));}catch{}}
 
-// parse "HH:MM" into total minutes since midnight
 const parseTimeToMinutes=(str)=>{if(!str)return null;const [h,m]=str.split(":").map(Number);if(isNaN(h)||isNaN(m))return null;return h*60+m;};
 const minutesDiff=(startStr,endStr)=>{const s=parseTimeToMinutes(startStr),e=parseTimeToMinutes(endStr);if(s===null||e===null)return null;const diff=e>=s?e-s:e+1440-s;return diff;};
+
+// Check and unlock achievements, return list of newly unlocked
+function checkAchievements(char, lv, existing=[]) {
+  const newOnes = [];
+  for(const ach of ACHIEVEMENTS) {
+    if(existing.includes(ach.id)) continue;
+    if(ach.check(char, lv)) newOnes.push(ach);
+  }
+  return newOnes;
+}
 
 const START={
   username:"Jhonas",totalXP:30,
@@ -160,7 +216,6 @@ const START={
   boss:{weekId:"",type:0,studyMin:0,trainCount:0,questions:0,runKm:0,claimed:false},
   concursos:[{...DEFAULT_CONCURSO,subjectMin:{},questions:{},studySessions:[]}],
   activeConcurso:"bb",
-  // books is now an array of current readings + library
   books:{reading:[],library:[]},
   runs:[],workoutLog:[],workoutPlans:null,unlockedAch:[],questionLog:[],
   finance:{salary:800,expenses:[
@@ -170,6 +225,11 @@ const START={
   ]},
   avatar:{skin:0,hair:0,hairStyle:"short",expression:"happy"},
   body:{weight:"",height:""},
+  habits:[],
+  moodLog:[],
+  simulados:[],
+  studyGoals:{},
+  xpHistory:[],
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -197,7 +257,7 @@ function AvatarSVG({skin=0,hair=0,hairStyle="short",expression="happy",size=80})
 }
 
 // ═══════════════════════════════════════════════════════════════
-// SHARED UI COMPONENTS — defined OUTSIDE App to prevent re-renders
+// SHARED UI — defined OUTSIDE App to prevent re-renders
 // ═══════════════════════════════════════════════════════════════
 const Card=({children,style,glow,anim})=>(
   <div style={{background:"#0f0f1e",border:`1px solid ${glow||"#1a1838"}`,borderRadius:12,padding:"12px 14px",animation:anim||"none",...style}}>
@@ -219,6 +279,24 @@ const STabs=({tabs,val,onChange})=>(
   </div>
 );
 
+// Simple bar chart component
+const MiniBarChart=({data,color="#60a5fa",height=60,label})=>{
+  const max=Math.max(...data.map(d=>d.v),1);
+  return(
+    <div>
+      {label&&<Lbl mb={6}>{label}</Lbl>}
+      <div style={{display:"flex",alignItems:"flex-end",gap:3,height}}>
+        {data.map((d,i)=>(
+          <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2}}>
+            <div style={{width:"100%",height:Math.max(2,(d.v/max)*(height-16)),background:d.v>0?color:"#1a1838",borderRadius:"3px 3px 0 0",transition:"height 0.3s",minHeight:d.v>0?4:2}}/>
+            <div style={{fontSize:7,color:"#444",fontFamily:"Cinzel,serif",textAlign:"center",lineHeight:1}}>{d.l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 // ═══════════════════════════════════════════════════════════════
 // APP
 // ═══════════════════════════════════════════════════════════════
@@ -231,19 +309,21 @@ export default function App(){
   const [floats,setFloats]=useState([]);
   const [lvlUpMsg,setLvlUp]=useState(null);
   const [toast,setToast]=useState(null);
+  const [achPopup,setAchPopup]=useState(null); // newly unlocked achievement
 
   const [studyTab,setStudyTab]=useState("timer");
   const [bodyTab,setBodyTab]=useState("treino");
   const [lifeTab,setLifeTab]=useState("financeiro");
   const [dailyTab,setDailyTab]=useState("missoes");
   const [qPeriod,setQPeriod]=useState("all");
+  const [statsTab,setStatsTab]=useState("xp");
+  const [achCat,setAchCat]=useState("all");
 
-  // Timer — start/end time approach
+  // Timer
   const [timerSub,setTimerSub]=useState(null);
   const [studyStart,setStudyStart]=useState("");
   const [studyEnd,setStudyEnd]=useState("");
   const [studyNote,setStudyNote]=useState("");
-  const m1=useRef(false),m2=useRef(false);
 
   // Workout states
   const [activeWorkout,setActiveWorkout]=useState(null);
@@ -265,14 +345,12 @@ export default function App(){
   const [qSub,setQSub]=useState("");
   const [qCorr,setQCorr]=useState("");
   const [qTot,setQTot]=useState("");
-  // Books — multiple simultaneous
   const [bookTitle,setBookTitle]=useState("");
   const [bookAuthor,setBookAuthor]=useState("");
   const [bookPages,setBookPages]=useState("");
   const [addingBook,setAddingBook]=useState(false);
   const [updatingBookId,setUpdatingBookId]=useState(null);
   const [bookPageInput,setBookPageInput]=useState("");
-
   const [runKm,setRunKm]=useState("");
   const [runMin,setRunMin]=useState("");
   const [weightIn,setWeightIn]=useState("");
@@ -286,10 +364,10 @@ export default function App(){
   const [editingSalary,setEditingSalary]=useState(false);
   const [salaryIn,setSalaryIn]=useState("");
 
-  // Concurso management
+  // Concurso
   const [addingConcurso,setAddingConcurso]=useState(false);
   const [newConcName,setNewConcName]=useState("");
-  const [editingConcursoId,setEditingConcursoId]=useState(null); // id of concurso being edited
+  const [editingConcursoId,setEditingConcursoId]=useState(null);
   const [editingSubjects,setEditingSubjects]=useState(false);
   const [newSubName,setNewSubName]=useState("");
   const [newSubIcon,setNewSubIcon]=useState("📝");
@@ -297,6 +375,25 @@ export default function App(){
   const [renamingConcId,setRenamingConcId]=useState(null);
   const [renamingConcName,setRenamingConcName]=useState("");
 
+  // Habits
+  const [addingHabit,setAddingHabit]=useState(false);
+  const [newHabitName,setNewHabitName]=useState("");
+  const [newHabitIcon,setNewHabitIcon]=useState("💧");
+  const [newHabitColor,setNewHabitColor]=useState("#60a5fa");
+  const [newHabitFreq,setNewHabitFreq]=useState("daily");
+
+  // Simulado
+  const [addingSimulado,setAddingSimulado]=useState(false);
+  const [simName,setSimName]=useState("");
+  const [simScore,setSimScore]=useState("");
+  const [simTotal,setSimTotal]=useState("");
+  const [simTime,setSimTime]=useState("");
+
+  // Study goals
+  const [editingGoal,setEditingGoal]=useState(null);
+  const [goalInput,setGoalInput]=useState("");
+
+  // Profile
   const [editingUsername,setEditingUsername]=useState(false);
   const [usernameIn,setUsernameIn]=useState("");
   const [showAvatarEditor,setShowAvatarEditor]=useState(false);
@@ -314,23 +411,19 @@ export default function App(){
       const p=await sg(`rpg_v6_p_${todayStr()}`);
       let loaded;
       if(c){
-        // Migrate old single-book format to array
-        let books = c.books || {reading:[],library:[]};
-        if(books.current !== undefined){
-          // old format: {current, library}
-          const reading = books.current ? [books.current] : [];
-          books = {reading, library: books.library||[]};
+        let books=c.books||{reading:[],library:[]};
+        if(books.current!==undefined){
+          books={reading:books.current?[books.current]:[],library:books.library||[]};
         }
-        if(!books.reading) books.reading = [];
-        if(!books.library) books.library = [];
+        if(!books.reading) books.reading=[];
+        if(!books.library) books.library=[];
 
-        // Migrate concursos to ensure subjects exist
-        const concursos = (c.concursos || [DEFAULT_CONCURSO]).map(cc => ({
+        const concursos=(c.concursos||[DEFAULT_CONCURSO]).map(cc=>({
           ...cc,
-          subjects: cc.subjects && cc.subjects.length > 0 ? cc.subjects : DEFAULT_SUBJECTS,
-          subjectMin: cc.subjectMin || {},
-          questions: cc.questions || {},
-          studySessions: cc.studySessions || [],
+          subjects:cc.subjects&&cc.subjects.length>0?cc.subjects:DEFAULT_SUBJECTS,
+          subjectMin:cc.subjectMin||{},
+          questions:cc.questions||{},
+          studySessions:cc.studySessions||[],
         }));
 
         loaded={...START,...c,
@@ -338,19 +431,36 @@ export default function App(){
           finance:{salary:c.finance?.salary||800,expenses:c.finance?.expenses||START.finance.expenses},
           streak:{...START.streak,...(c.streak||{})},
           boss:{...START.boss,...(c.boss||{})},
-          books,
-          concursos,
-          avatar:c.avatar||START.avatar,body:c.body||START.body,
+          books,concursos,
+          avatar:c.avatar||START.avatar,
+          body:c.body||START.body,
           workoutPlans:c.workoutPlans||null,
-          runs:c.runs||[],workoutLog:c.workoutLog||[],unlockedAch:c.unlockedAch||[],
+          runs:c.runs||[],workoutLog:c.workoutLog||[],
+          unlockedAch:c.unlockedAch||[],
           questionLog:c.questionLog||[],
+          habits:c.habits||[],
+          moodLog:c.moodLog||[],
+          simulados:c.simulados||[],
+          studyGoals:c.studyGoals||{},
+          xpHistory:c.xpHistory||[],
         };
       } else { loaded={...START}; }
+
       const wid=weekId();
       if(loaded.boss.weekId!==wid){
         const wn=parseInt(wid.split("W")[1])||0;
         loaded.boss={weekId:wid,type:wn%BOSS_POOL.length,studyMin:0,trainCount:0,questions:0,runKm:0,claimed:false};
       }
+
+      // ── FIX STREAK on load ──
+      // If we haven't logged today yet, check if yesterday was the last date — keep streak
+      // If last date is neither today nor yesterday, reset to 0
+      const td=todayStr(), yd=yesterdayStr();
+      const s=loaded.streak;
+      if(s.lastDate && s.lastDate!==td && s.lastDate!==yd){
+        loaded.streak={...s,current:0};
+      }
+
       setChar(loaded);setQuests(q||{});setPens(p||{});
       const ac=loaded.concursos?.find(c2=>c2.id===loaded.activeConcurso);
       if(ac?.subjects?.length) setQSub(ac.subjects[0].id);
@@ -367,6 +477,23 @@ export default function App(){
   const showToast=(msg,color="#f0c040")=>{setToast({msg,color});setTimeout(()=>setToast(null),2800);};
   const save=async(c,q,p)=>{await ss("rpg_v6_char",c);if(q!=null)await ss(`rpg_v6_q_${todayStr()}`,q);if(p!=null)await ss(`rpg_v6_p_${todayStr()}`,p);};
 
+  // ── CHECK & AWARD ACHIEVEMENTS ──
+  const checkAndAwardAch=useCallback(async(nc)=>{
+    const lv=getLvl(nc.totalXP).cur.lv;
+    const newly=checkAchievements(nc,lv,nc.unlockedAch||[]);
+    if(newly.length===0) return nc;
+    let xpBonus=0;
+    newly.forEach(a=>xpBonus+=a.xp);
+    const updated={...nc,
+      totalXP:nc.totalXP+xpBonus,
+      unlockedAch:[...(nc.unlockedAch||[]),...newly.map(a=>a.id)]
+    };
+    // show popup for first one
+    setAchPopup(newly[0]);
+    setTimeout(()=>setAchPopup(null),3500);
+    return updated;
+  },[]);
+
   const applyDelta=(c,oldQ,newQ,raw)=>{
     const multi=streakMulti(c.streak?.current||0);
     const bonus=raw>0?Math.round(raw*(multi-1)):0;
@@ -382,14 +509,17 @@ export default function App(){
     }
   };
 
+  // ── STREAK FIX: use local date strings, not ISO ──
   const updateStreak=(c,newQ)=>{
     const cores=QUESTS.filter(q=>q.core).map(q=>q.id);
     if(!cores.every(id=>newQ[id])) return c.streak;
-    const td=todayStr(),s={...c.streak};
-    if(s.lastDate===td) return s;
-    const yest=new Date();yest.setDate(yest.getDate()-1);
-    s.current=s.lastDate===yest.toISOString().slice(0,10)?s.current+1:1;
-    s.best=Math.max(s.best,s.current);s.lastDate=td;return s;
+    const td=todayStr(),yd=yesterdayStr();
+    const s={...c.streak};
+    if(s.lastDate===td) return s; // already counted today
+    s.current = s.lastDate===yd ? s.current+1 : 1; // consecutive or reset
+    s.best=Math.max(s.best,s.current);
+    s.lastDate=td;
+    return s;
   };
 
   const autoQuest=useCallback((qid,xp)=>{
@@ -416,7 +546,8 @@ export default function App(){
     if(newStreak.current>(ns.streakBest||0)) ns.streakBest=newStreak.current;
     const newBoss={...char.boss};
     if(!wasOn&&quest.id==="workout") newBoss.trainCount=(newBoss.trainCount||0)+1;
-    const nc={...char,totalXP:newXP,stats:ns,streak:newStreak,boss:newBoss};
+    let nc={...char,totalXP:newXP,stats:ns,streak:newStreak,boss:newBoss};
+    nc=await checkAndAwardAch(nc);
     charRef.current=nc;setChar(nc);addFloat(delta);triggerLvl(char.totalXP,newXP);await save(nc,newQ,null);
   };
 
@@ -426,7 +557,7 @@ export default function App(){
     const nc={...char,totalXP:newXP};charRef.current=nc;setChar(nc);addFloat(delta);await save(nc,null,newP);
   };
 
-  // ── STUDY SESSION (start/end time) ──
+  // ── STUDY SESSION ──
   const saveStudySession=async()=>{
     if(!timerSub||!studyStart||!studyEnd) return;
     const mins=minutesDiff(studyStart,studyEnd);
@@ -441,12 +572,18 @@ export default function App(){
     const newXP=Math.max(0,c.totalXP+xpGain);
     const newHours=(c.stats.totalStudyHours||0)+Math.floor(mins/60);
     const newBoss={...c.boss,studyMin:(c.boss.studyMin||0)+mins};
-    const nc={...c,totalXP:newXP,stats:{...c.stats,totalStudyHours:newHours},concursos:concs,boss:newBoss};
-    charRef.current=nc;setChar(nc);addFloat(xpGain);triggerLvl(c.totalXP,newXP);
-    // auto quest checks
+    // record xp history
+    const today=todayStr();
+    const xpHist=[...(c.xpHistory||[])];
+    const todayIdx=xpHist.findIndex(h=>h.date===today);
+    if(todayIdx>=0) xpHist[todayIdx]={...xpHist[todayIdx],xp:xpHist[todayIdx].xp+xpGain};
+    else xpHist.push({date:today,xp:xpGain});
+    let nc={...c,totalXP:newXP,stats:{...c.stats,totalStudyHours:newHours},concursos:concs,boss:newBoss,xpHistory:xpHist.slice(-30)};
+    nc=await checkAndAwardAch(nc);
     const totalMinsToday=(concs.find(cc=>cc.id===c.activeConcurso)?.subjectMin||{})[timerSub]||0;
     if(mins>=60||totalMinsToday>=60) autoQuest("study_1h",30);
     if(mins>=120||totalMinsToday>=120) autoQuest("study_2h",25);
+    charRef.current=nc;setChar(nc);addFloat(xpGain);triggerLvl(c.totalXP,newXP);
     await save(nc,null,null);
     setStudyStart("");setStudyEnd("");setStudyNote("");
     showToast(`📚 ${fmtHM(mins)} registrados! +${xpGain} XP`,"#60a5fa");
@@ -454,49 +591,33 @@ export default function App(){
 
   const getPlans=()=>char?.workoutPlans||DEFAULT_PLANS;
 
-  // ── WORKOUT EDITOR ──
-  const openEditPlan=(key)=>{
-    const plans=getPlans();
-    setEditingPlanKey(key);
-    setEditPlan(JSON.parse(JSON.stringify(plans[key])));
-    setWorkoutView("edit");
-  };
-
+  // ── WORKOUT ──
+  const openEditPlan=(key)=>{setEditingPlanKey(key);setEditPlan(JSON.parse(JSON.stringify(getPlans()[key])));setWorkoutView("edit");};
   const saveEditPlan=async()=>{
     if(!editPlan) return;
     const c=charRef.current;
     const plans={...getPlans(),[editingPlanKey]:editPlan};
     const nc={...c,workoutPlans:plans};
     charRef.current=nc;setChar(nc);await save(nc,null,null);
-    setWorkoutView("list");setEditingPlanKey(null);setEditPlan(null);
-    showToast("Treino salvo!","#ef4444");
+    setWorkoutView("list");setEditingPlanKey(null);setEditPlan(null);showToast("Treino salvo!","#ef4444");
   };
-
   const addExerciseToEdit=()=>{
     if(!newExName.trim()) return;
     const ex={id:uid(),name:newExName,sets:parseInt(newExSets)||3,reps:newExReps||"12",rest:newExRest||"60s",tip:newExTip||""};
     setEditPlan(p=>({...p,exercises:[...p.exercises,ex]}));
     setNewExName("");setNewExSets("3");setNewExReps("12");setNewExRest("60s");setNewExTip("");
   };
-
   const removeExercise=(idx)=>setEditPlan(p=>({...p,exercises:p.exercises.filter((_,i)=>i!==idx)}));
-
-  const updateExField=(idx,field,val)=>setEditPlan(p=>{
-    const exs=[...p.exercises];exs[idx]={...exs[idx],[field]:val};return {...p,exercises:exs};
-  });
-
+  const updateExField=(idx,field,val)=>setEditPlan(p=>{const exs=[...p.exercises];exs[idx]={...exs[idx],[field]:val};return {...p,exercises:exs};});
   const createNewPlan=async()=>{
     if(!newPlanName.trim()) return;
     const key=`custom_${uid()}`;
     const plan={id:key,label:newPlanName,focus:newPlanFocus||"Treino personalizado",icon:newPlanIcon,color:newPlanColor,isDefault:false,exercises:[]};
     const c=charRef.current;
-    const plans={...getPlans(),[key]:plan};
-    const nc={...c,workoutPlans:plans};
+    const nc={...c,workoutPlans:{...getPlans(),[key]:plan}};
     charRef.current=nc;setChar(nc);await save(nc,null,null);
-    setNewPlanName("");setNewPlanFocus("");setWorkoutView("list");
-    showToast("Nova ficha criada!",newPlanColor);
+    setNewPlanName("");setNewPlanFocus("");setWorkoutView("list");showToast("Nova ficha criada!",newPlanColor);
   };
-
   const deletePlan=async(key)=>{
     const plans=getPlans();
     if(Object.keys(plans).length<=1){showToast("Mantenha ao menos 1 treino","#ef4444");return;}
@@ -504,7 +625,6 @@ export default function App(){
     const c=charRef.current;const nc={...c,workoutPlans:newPlans};
     charRef.current=nc;setChar(nc);await save(nc,null,null);showToast("Ficha removida","#ef4444");
   };
-
   const startWorkout=(key)=>{setActiveWorkout(key);setDoneEx({});setWorkoutView("active");};
   const finishWorkout=async()=>{
     const plan=getPlans()[activeWorkout];
@@ -515,7 +635,8 @@ export default function App(){
     const log2={date:todayStr(),workout:activeWorkout,label:plan.label,done:done2,total:plan.exercises.length,xp};
     const newXP=Math.max(0,c.totalXP+xp);
     const newQ={...questsRef.current,workout:true};setQuests(newQ);questsRef.current=newQ;
-    const nc={...c,totalXP:newXP,stats:newStats,boss:{...c.boss,trainCount:(c.boss.trainCount||0)+1},workoutLog:[log2,...(c.workoutLog||[])].slice(0,30)};
+    let nc={...c,totalXP:newXP,stats:newStats,boss:{...c.boss,trainCount:(c.boss.trainCount||0)+1},workoutLog:[log2,...(c.workoutLog||[])].slice(0,30)};
+    nc=await checkAndAwardAch(nc);
     charRef.current=nc;setChar(nc);addFloat(xp);triggerLvl(c.totalXP,newXP);await save(nc,newQ,null);
     setActiveWorkout(null);setDoneEx({});setWorkoutView("list");showToast(`${plan.label} concluído! +${xp} XP`,plan.color);
   };
@@ -529,11 +650,11 @@ export default function App(){
       return {...cc,questions:{...(cc.questions||{}),[qSub]:{correct:prev.correct+cor,total:prev.total+tot}}};});
     const xpGain=Math.round(cor*0.5);const newXP=Math.max(0,c.totalXP+xpGain);
     const newLog=[{date:todayStr(),subject:qSub,correct:cor,total:tot,concurso:c.activeConcurso},...(c.questionLog||[])].slice(0,500);
-    const nc={...c,totalXP:newXP,stats:{...c.stats,totalQuestions:(c.stats.totalQuestions||0)+tot},concursos:concs,boss:{...c.boss,questions:(c.boss.questions||0)+tot},questionLog:newLog};
+    let nc={...c,totalXP:newXP,stats:{...c.stats,totalQuestions:(c.stats.totalQuestions||0)+tot},concursos:concs,boss:{...c.boss,questions:(c.boss.questions||0)+tot},questionLog:newLog};
+    nc=await checkAndAwardAch(nc);
     charRef.current=nc;setChar(nc);addFloat(xpGain);triggerLvl(c.totalXP,newXP);await save(nc,null,null);
     setQCorr("");setQTot("");showToast(`+${xpGain} XP · ${cor}/${tot} acertos`,"#a78bfa");
   };
-
   const getQStats=(sub,ac)=>{
     if(qPeriod==="all") return (ac?.questions||{})[sub]||{correct:0,total:0};
     const days=qPeriod==="today"?0:qPeriod==="7d"?7:30;
@@ -542,45 +663,39 @@ export default function App(){
     return {correct:logs.reduce((a,l)=>a+l.correct,0),total:logs.reduce((a,l)=>a+l.total,0)};
   };
 
-  // ── LIVROS (multiple simultaneous) ──
+  // ── LIVROS ──
   const addBook=async()=>{
     if(!bookTitle||!bookPages) return;
     const book={id:`bk_${uid()}`,title:bookTitle,author:bookAuthor,page:0,total:parseInt(bookPages),startDate:todayStr()};
     const c=charRef.current;
-    const reading=[...(c.books.reading||[]),book];
-    const nc={...c,books:{...c.books,reading}};
+    const nc={...c,books:{...c.books,reading:[...(c.books.reading||[]),book]}};
     charRef.current=nc;setChar(nc);await save(nc,null,null);
     setBookTitle("");setBookAuthor("");setBookPages("");setAddingBook(false);
     showToast("📖 Livro adicionado!","#60a5fa");
   };
-
   const updateBookPage=async(bookId)=>{
     const p=parseInt(bookPageInput);if(!p) return;
     const c=charRef.current;
     const reading=(c.books.reading||[]).map(b=>b.id===bookId?{...b,page:Math.min(p,b.total)}:b);
     const nc={...c,books:{...c.books,reading}};
     charRef.current=nc;setChar(nc);await save(nc,null,null);
-    setUpdatingBookId(null);setBookPageInput("");
-    showToast(`Página salva!`,"#60a5fa");
+    setUpdatingBookId(null);setBookPageInput("");showToast("Página salva!","#60a5fa");
   };
-
   const finishBook=async(bookId)=>{
     const c=charRef.current;
-    const book=c.books.reading.find(b=>b.id===bookId);
-    if(!book) return;
+    const book=c.books.reading.find(b=>b.id===bookId);if(!book) return;
     const done={...book,finishedDate:todayStr()};
     const reading=(c.books.reading||[]).filter(b=>b.id!==bookId);
-    const nc={...c,totalXP:c.totalXP+80,stats:{...c.stats,booksFinished:(c.stats.booksFinished||0)+1},books:{reading,library:[done,...(c.books.library||[])]}};
+    let nc={...c,totalXP:c.totalXP+80,stats:{...c.stats,booksFinished:(c.stats.booksFinished||0)+1},books:{reading,library:[done,...(c.books.library||[])]}};
+    nc=await checkAndAwardAch(nc);
     charRef.current=nc;setChar(nc);addFloat(80);triggerLvl(c.totalXP,nc.totalXP);await save(nc,null,null);
     showToast("📚 Livro finalizado! +80 XP","#f0c040");
   };
-
   const removeBook=async(bookId)=>{
     const c=charRef.current;
     const reading=(c.books.reading||[]).filter(b=>b.id!==bookId);
     const nc={...c,books:{...c.books,reading}};
-    charRef.current=nc;setChar(nc);await save(nc,null,null);
-    showToast("Livro removido","#ef4444");
+    charRef.current=nc;setChar(nc);await save(nc,null,null);showToast("Livro removido","#ef4444");
   };
 
   // ── CORRIDA ──
@@ -590,7 +705,8 @@ export default function App(){
     const pace=min2&&km?Math.round((min2/km)*60):null;
     const ns={...c.stats,totalKm:(c.stats.totalKm||0)+km,totalRuns:(c.stats.totalRuns||0)+1,prKm:Math.max(c.stats.prKm||0,km)};
     const newXP=Math.max(0,c.totalXP+xpGain);
-    const nc={...c,totalXP:newXP,stats:ns,boss:{...c.boss,runKm:(c.boss.runKm||0)+km},runs:[{date:todayStr(),km,minutes:min2||null,pace,xp:xpGain,pr:isPR},...(c.runs||[])].slice(0,100)};
+    let nc={...c,totalXP:newXP,stats:ns,boss:{...c.boss,runKm:(c.boss.runKm||0)+km},runs:[{date:todayStr(),km,minutes:min2||null,pace,xp:xpGain,pr:isPR},...(c.runs||[])].slice(0,100)};
+    nc=await checkAndAwardAch(nc);
     charRef.current=nc;setChar(nc);addFloat(xpGain);triggerLvl(c.totalXP,newXP);await save(nc,null,null);
     setRunKm("");setRunMin("");showToast(`🏃 ${km}km${isPR?" · PR! 🏅":""}`,isPR?"#f0c040":"#34d399");
   };
@@ -609,50 +725,37 @@ export default function App(){
     const c=charRef.current;
     const nc={...c,concursos:[...c.concursos,{id,name:newConcName,active:true,subjects:[...DEFAULT_SUBJECTS],subjectMin:{},questions:{},studySessions:[]}],activeConcurso:id};
     charRef.current=nc;setChar(nc);await save(nc,null,null);
-    setNewConcName("");setAddingConcurso(false);
-    setQSub(DEFAULT_SUBJECTS[0].id);
-    showToast("Concurso criado!","#a78bfa");
+    setNewConcName("");setAddingConcurso(false);setQSub(DEFAULT_SUBJECTS[0].id);showToast("Concurso criado!","#a78bfa");
   };
-
   const deleteConcurso=async(id)=>{
     const c=charRef.current;
     if(c.concursos.length<=1){showToast("Mantenha ao menos 1 concurso","#ef4444");return;}
     const concursos=c.concursos.filter(cc=>cc.id!==id);
     const activeConcurso=c.activeConcurso===id?concursos[0].id:c.activeConcurso;
     const nc={...c,concursos,activeConcurso};
-    charRef.current=nc;setChar(nc);await save(nc,null,null);
-    showToast("Concurso removido","#ef4444");
+    charRef.current=nc;setChar(nc);await save(nc,null,null);showToast("Concurso removido","#ef4444");
   };
-
   const renameConcurso=async()=>{
     if(!renamingConcName.trim()||!renamingConcId) return;
     const c=charRef.current;
     const concursos=c.concursos.map(cc=>cc.id===renamingConcId?{...cc,name:renamingConcName.trim()}:cc);
-    const nc={...c,concursos};
-    charRef.current=nc;setChar(nc);await save(nc,null,null);
-    setRenamingConcId(null);setRenamingConcName("");
-    showToast("Concurso renomeado!","#a78bfa");
+    const nc={...c,concursos};charRef.current=nc;setChar(nc);await save(nc,null,null);
+    setRenamingConcId(null);setRenamingConcName("");showToast("Renomeado!","#a78bfa");
   };
-
   const switchConcurso=async(id)=>{
     const c=charRef.current;const nc={...c,activeConcurso:id};
     charRef.current=nc;setChar(nc);await save(nc,null,null);
     const conc=c.concursos.find(cc=>cc.id===id);
     if(conc?.subjects?.length) setQSub(conc.subjects[0].id);
   };
-
-  // ── SUBJECT MANAGEMENT ──
   const addSubject=async()=>{
     if(!newSubName.trim()) return;
     const c=charRef.current;
     const sub={id:`s_${uid()}`,name:newSubName.trim(),icon:newSubIcon,color:newSubColor};
     const concursos=c.concursos.map(cc=>cc.id===editingConcursoId?{...cc,subjects:[...(cc.subjects||[]),sub]}:cc);
-    const nc={...c,concursos};
-    charRef.current=nc;setChar(nc);await save(nc,null,null);
-    setNewSubName("");
-    showToast("Matéria adicionada!",newSubColor);
+    const nc={...c,concursos};charRef.current=nc;setChar(nc);await save(nc,null,null);
+    setNewSubName("");showToast("Matéria adicionada!",newSubColor);
   };
-
   const removeSubject=async(concId,subId)=>{
     const c=charRef.current;
     const concursos=c.concursos.map(cc=>{
@@ -662,18 +765,99 @@ export default function App(){
       const questions={...cc.questions};delete questions[subId];
       return {...cc,subjects,subjectMin,questions};
     });
-    const nc={...c,concursos};
-    charRef.current=nc;setChar(nc);await save(nc,null,null);
-    showToast("Matéria removida","#ef4444");
+    const nc={...c,concursos};charRef.current=nc;setChar(nc);await save(nc,null,null);showToast("Matéria removida","#ef4444");
   };
 
-  // ── AVATAR / USERNAME ──
+  // ── HABITS ──
+  const addHabit=async()=>{
+    if(!newHabitName.trim()) return;
+    const habit={id:`h_${uid()}`,name:newHabitName.trim(),icon:newHabitIcon,color:newHabitColor,freq:newHabitFreq,log:{}};
+    const c=charRef.current;
+    const nc={...c,habits:[...(c.habits||[]),habit]};
+    charRef.current=nc;setChar(nc);await save(nc,null,null);
+    setNewHabitName("");setAddingHabit(false);showToast("Hábito criado!",newHabitColor);
+  };
+  const toggleHabit=async(habitId)=>{
+    const c=charRef.current;
+    const td=todayStr();
+    const habits=(c.habits||[]).map(h=>{
+      if(h.id!==habitId) return h;
+      const log={...h.log};
+      const wasDone=!!log[td];
+      if(wasDone) delete log[td]; else log[td]=true;
+      return {...h,log};
+    });
+    const habit=habits.find(h=>h.id===habitId);
+    const wasDone=!(habit.log[td]);// inverted because we already toggled
+    const xpDelta=wasDone?-5:5;
+    const nc={...c,habits,totalXP:Math.max(0,c.totalXP+xpDelta)};
+    charRef.current=nc;setChar(nc);addFloat(xpDelta);await save(nc,null,null);
+  };
+  const removeHabit=async(habitId)=>{
+    const c=charRef.current;
+    const nc={...c,habits:(c.habits||[]).filter(h=>h.id!==habitId)};
+    charRef.current=nc;setChar(nc);await save(nc,null,null);showToast("Hábito removido","#ef4444");
+  };
+
+  // ── SIMULADO ──
+  const addSimulado=async()=>{
+    if(!simScore||!simTotal) return;
+    const sim={id:`sim_${uid()}`,name:simName||`Simulado ${(char.simulados||[]).length+1}`,score:parseInt(simScore),total:parseInt(simTotal),time:simTime||"",date:todayStr(),concurso:char.activeConcurso};
+    const xp=Math.round(parseInt(simScore)*0.5);
+    const c=charRef.current;
+    let nc={...c,totalXP:c.totalXP+xp,simulados:[sim,...(c.simulados||[])].slice(0,50)};
+    nc=await checkAndAwardAch(nc);
+    charRef.current=nc;setChar(nc);addFloat(xp);triggerLvl(c.totalXP,nc.totalXP);await save(nc,null,null);
+    setSimName("");setSimScore("");setSimTotal("");setSimTime("");setAddingSimulado(false);
+    showToast(`📋 Simulado! ${sim.score}/${sim.total} +${xp}XP`,"#a78bfa");
+  };
+
+  // ── STUDY GOALS ──
+  const saveGoal=async(subId)=>{
+    const v=parseInt(goalInput);if(!v||v<=0) return;
+    const c=charRef.current;
+    const nc={...c,studyGoals:{...(c.studyGoals||{}),[subId]:v}};
+    charRef.current=nc;setChar(nc);await save(nc,null,null);
+    setEditingGoal(null);setGoalInput("");showToast("Meta salva!","#60a5fa");
+  };
+
+  // ── MOOD ──
+  const logMood=async(moodId)=>{
+    const mood=MOODS.find(m=>m.id===moodId);if(!mood) return;
+    const td=todayStr();
+    const c=charRef.current;
+    const moodLog=[...(c.moodLog||[]).filter(m=>m.date!==td),{date:td,mood:moodId}].slice(-60);
+    const nc={...c,moodLog,totalXP:c.totalXP+mood.xp};
+    charRef.current=nc;setChar(nc);if(mood.xp>0) addFloat(mood.xp);await save(nc,null,null);
+    showToast(`Humor registrado ${mood.icon}`,"#a78bfa");
+  };
+
+  // ── AVATAR ──
   const saveAvatar=async(av)=>{const c=charRef.current;const nc={...c,avatar:{...c.avatar,...av}};charRef.current=nc;setChar(nc);await save(nc,null,null);};
   const saveUsername=async()=>{if(!usernameIn.trim())return;const c=charRef.current;const nc={...c,username:usernameIn.trim()};charRef.current=nc;setChar(nc);await save(nc,null,null);setEditingUsername(false);setUsernameIn("");showToast("Nome atualizado!","#f0c040");};
   const saveBodyStats=async()=>{if(!weightIn&&!heightIn)return;const c=charRef.current;const nc={...c,body:{weight:weightIn||c.body?.weight||"",height:heightIn||c.body?.height||""}};charRef.current=nc;setChar(nc);await save(nc,null,null);setWeightIn("");setHeightIn("");showToast("Medidas salvas!","#34d399");};
 
   // ── BOSS ──
-  const claimBoss=async()=>{const c=charRef.current;const boss=BOSS_POOL[c.boss?.type||0];const newXP=Math.max(0,c.totalXP+boss.xp);const nc={...c,totalXP:newXP,stats:{...c.stats,bossesCleared:(c.stats.bossesCleared||0)+1},boss:{...c.boss,claimed:true}};charRef.current=nc;setChar(nc);addFloat(boss.xp);triggerLvl(c.totalXP,newXP);await save(nc,null,null);showToast(`⚔️ Boss derrotado! +${boss.xp} XP`,"#f0c040");};
+  const claimBoss=async()=>{const c=charRef.current;const boss=BOSS_POOL[c.boss?.type||0];const newXP=Math.max(0,c.totalXP+boss.xp);let nc={...c,totalXP:newXP,stats:{...c.stats,bossesCleared:(c.stats.bossesCleared||0)+1},boss:{...c.boss,claimed:true}};nc=await checkAndAwardAch(nc);charRef.current=nc;setChar(nc);addFloat(boss.xp);triggerLvl(c.totalXP,newXP);await save(nc,null,null);showToast(`⚔️ Boss derrotado! +${boss.xp} XP`,"#f0c040");};
+
+  // ── EXPORT ──
+  const exportData=()=>{
+    const data=JSON.stringify(char,null,2);
+    const blob=new Blob([data],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;a.download=`rpg_backup_${todayStr()}.json`;a.click();
+    URL.revokeObjectURL(url);
+    showToast("Backup exportado!","#22c55e");
+  };
+
+  // ── NOTIFICATIONS ──
+  const requestNotif=async()=>{
+    if(!("Notification" in window)){showToast("Notificações não suportadas","#ef4444");return;}
+    const p=await Notification.requestPermission();
+    if(p==="granted"){showToast("Notificações ativadas! ✓","#22c55e");}
+    else showToast("Permissão negada","#ef4444");
+  };
 
   // ═══════════════════════════════════════════════════════════════
   // RENDER
@@ -710,8 +894,18 @@ export default function App(){
   const plans=getPlans();
   const todayXP=(()=>{let x=QUESTS.filter(q=>quests[q.id]).reduce((s,q)=>s+q.xp,0)+PENALTIES.filter(p=>pens[p.id]).reduce((s,p)=>s+p.xp,0);if(QUESTS.filter(q=>q.core).every(q=>quests[q.id]))x+=20;return x;})();
   const readingBooks=char.books?.reading||[];
-  // minutes for current session preview
   const previewMins=studyStart&&studyEnd?minutesDiff(studyStart,studyEnd):null;
+  const todayMood=(char.moodLog||[]).find(m=>m.date===todayStr());
+  const unlockedCount=(char.unlockedAch||[]).length;
+  const habitsToday=(char.habits||[]).filter(h=>!!h.log?.[todayStr()]).length;
+  const totalHabits=(char.habits||[]).length;
+
+  // XP history chart data (last 7 days)
+  const last7=[];
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;const entry=(char.xpHistory||[]).find(h=>h.date===ds);last7.push({l:["D","S","T","Q","Q","S","S"][(d.getDay())],v:entry?.xp||0});}
+
+  // Study hours per subject chart
+  const subjectChartData=(ac?.subjects||[]).slice(0,6).map(s=>({l:s.name.slice(0,3),v:Math.round(((ac.subjectMin||{})[s.id]||0)/60*10)/10,color:s.color}));
 
   const css=`
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600&display=swap');
@@ -723,8 +917,10 @@ export default function App(){
     @keyframes pulse{0%,100%{box-shadow:0 0 6px #f0c04033}50%{box-shadow:0 0 22px #f0c04077}}
     @keyframes gpulse{0%,100%{box-shadow:0 0 6px #22c55e33}50%{box-shadow:0 0 22px #22c55e77}}
     @keyframes rpulse{0%,100%{box-shadow:0 0 6px #ef444433}50%{box-shadow:0 0 20px #ef444488}}
+    @keyframes apulse{0%,100%{box-shadow:0 0 8px #f0c04066}50%{box-shadow:0 0 30px #f0c040cc}}
     @keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
     @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
     .btn{background:none;border:none;cursor:pointer;text-align:left;width:100%;padding:0}.btn:active{transform:scale(0.97)}
     .tbtn{background:none;border:none;cursor:pointer}.tbtn:active{transform:scale(0.93)}
     .inp{background:#0f0f1e;border:1px solid #2a2848;border-radius:8px;color:#e8dfc0;font-family:Crimson Text,serif;font-size:14px;padding:9px 12px;width:100%;outline:none}
@@ -737,7 +933,7 @@ export default function App(){
     <div style={{background:"#07070f",height:"100vh",width:"100vw",fontFamily:"Crimson Text,Georgia,serif",color:"#e8dfc0",display:"flex",flexDirection:"column",overflow:"hidden"}}>
       <style>{css}</style>
 
-      {/* BG glow */}
+      {/* BG */}
       <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0}}>
         <div style={{position:"absolute",top:-60,left:-60,width:240,height:240,borderRadius:"50%",background:"radial-gradient(circle,#1a0a3a44,transparent 70%)"}}/>
       </div>
@@ -750,8 +946,17 @@ export default function App(){
       {/* Toast */}
       {toast&&<div style={{position:"fixed",top:14,left:"50%",transform:"translateX(-50%)",zIndex:400,animation:"fadeIn 0.3s ease",background:"#111122ee",border:`1px solid ${toast.color}55`,borderRadius:12,padding:"10px 20px",fontSize:12,color:toast.color,fontFamily:"Cinzel,serif",letterSpacing:1,whiteSpace:"nowrap",pointerEvents:"none"}}>{toast.msg}</div>}
 
-      {/* LevelUp */}
+      {/* Level Up */}
       {lvlUpMsg&&<div style={{position:"fixed",inset:0,zIndex:500,display:"flex",alignItems:"center",justifyContent:"center",background:"#00000099",pointerEvents:"none"}}><div style={{animation:"lvlUp 3.5s ease-in-out forwards",background:"linear-gradient(135deg,#1a0d00,#2a1800)",border:`2px solid ${lvlUpMsg.color}`,borderRadius:22,padding:"28px 48px",textAlign:"center",boxShadow:`0 0 80px ${lvlUpMsg.color}55`}}><div style={{fontSize:48}}>⬆️</div><div style={{fontFamily:"Cinzel,serif",fontSize:9,letterSpacing:5,color:"#888",margin:"8px 0 4px"}}>LEVEL UP</div><div style={{fontFamily:"Cinzel,serif",fontSize:34,fontWeight:900,color:lvlUpMsg.color}}>{lvlUpMsg.lv}</div><div style={{fontFamily:"Cinzel,serif",fontSize:14,color:"#e8dfc0",marginTop:6}}>{lvlUpMsg.title}</div></div></div>}
+
+      {/* Achievement popup */}
+      {achPopup&&<div style={{position:"fixed",bottom:80,left:"50%",transform:"translateX(-50%)",zIndex:450,animation:"slideUp 0.4s ease",background:"linear-gradient(135deg,#1a1000,#2a1e00)",border:"2px solid #f0c04077",borderRadius:16,padding:"14px 20px",textAlign:"center",boxShadow:"0 0 40px #f0c04044",pointerEvents:"none",minWidth:220}}>
+        <div style={{fontSize:28,marginBottom:4}}>{achPopup.icon}</div>
+        <div style={{fontFamily:"Cinzel,serif",fontSize:8,letterSpacing:3,color:"#f0c04099",marginBottom:2}}>CONQUISTA DESBLOQUEADA</div>
+        <div style={{fontFamily:"Cinzel,serif",fontSize:14,color:"#f0c040",fontWeight:700}}>{achPopup.name}</div>
+        <div style={{fontSize:11,color:"#aaa",marginTop:2}}>{achPopup.desc}</div>
+        <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:"#f0c040",marginTop:4}}>+{achPopup.xp} XP</div>
+      </div>}
 
       {/* HEADER */}
       <div style={{background:"linear-gradient(180deg,#0d0820,#08080f)",borderBottom:"1px solid #1a1838",padding:"11px 14px 8px",position:"sticky",top:0,zIndex:100,flexShrink:0}}>
@@ -763,6 +968,7 @@ export default function App(){
               <div style={{display:"flex",alignItems:"center",gap:5,marginTop:2}}>
                 <span style={{fontSize:9,color:"#a78bfa",fontFamily:"Cinzel,serif"}}>{dynTitle.icon} {dynTitle.title}</span>
                 {streak>0&&<span style={{fontSize:8,color:"#f97316",background:"#f9731622",border:"1px solid #f9731644",borderRadius:5,padding:"1px 5px",fontFamily:"Cinzel,serif"}}>🔥{streak}d{multi>1?` ×${multi.toFixed(2)}`:""}</span>}
+                {todayMood&&<span style={{fontSize:12}}>{MOODS.find(m=>m.id===todayMood.mood)?.icon}</span>}
               </div>
             </div>
           </div>
@@ -785,9 +991,9 @@ export default function App(){
         {weakSubs.length>0&&<div style={{marginTop:5,background:"#1a080844",border:"1px solid #ef444455",borderRadius:7,padding:"3px 10px",display:"flex",alignItems:"center",gap:6,animation:"rpulse 2.5s infinite"}}><span style={{fontSize:10}}>⚠️</span><span style={{fontSize:8,color:"#ef9999",fontFamily:"Cinzel,serif"}}>{weakSubs.map(s=>s.name.split(" ")[0]).join(", ")} abaixo de 80%</span></div>}
       </div>
 
-      {/* Avatar drawer */}
+      {/* Avatar editor */}
       {showAvatarEditor&&(
-        <div style={{background:"#0d0820",border:"1px solid #1a1838",padding:"11px 14px",position:"sticky",top:showAvatarEditor?0:"-100%",zIndex:99,animation:"fadeIn 0.2s ease",flexShrink:0}}>
+        <div style={{background:"#0d0820",border:"1px solid #1a1838",padding:"11px 14px",position:"sticky",top:0,zIndex:99,animation:"fadeIn 0.2s ease",flexShrink:0}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:9}}>
             <Lbl mb={0}>EDITAR AVATAR</Lbl>
             <button className="tbtn" onClick={()=>setShowAvatarEditor(false)} style={{color:"#555",fontSize:16}}>✕</button>
@@ -811,31 +1017,83 @@ export default function App(){
       {/* CONTENT */}
       <div style={{flex:1,overflowY:"auto",paddingBottom:68,position:"relative",zIndex:10}}>
 
-        {/* HOME */}
+        {/* ── HOME ── */}
         {tab==="home"&&<div style={{padding:"12px 12px 0"}}>
+          {/* Mood check-in */}
+          <Card glow="#a78bfa33" style={{marginBottom:10}}>
+            <Lbl mb={6}>COMO ESTÁ HOJE?</Lbl>
+            <div style={{display:"flex",gap:6,justifyContent:"space-between"}}>
+              {MOODS.map(m=>(
+                <button key={m.id} className="tbtn" onClick={()=>logMood(m.id)} style={{flex:1,padding:"8px 4px",borderRadius:10,border:`2px solid ${todayMood?.mood===m.id?m.color:m.color+"33"}`,background:todayMood?.mood===m.id?m.color+"22":"transparent",display:"flex",flexDirection:"column",alignItems:"center",gap:2}}>
+                  <span style={{fontSize:18}}>{m.icon}</span>
+                  <span style={{fontSize:7,fontFamily:"Cinzel,serif",color:todayMood?.mood===m.id?m.color:"#444"}}>{m.label.toUpperCase()}</span>
+                </button>
+              ))}
+            </div>
+          </Card>
+
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:10}}>
             {[{l:"Streak",v:`${streak}d`,i:"🔥",c:"#f97316"},{l:"Estudos",v:fmtHM(Object.values(ac?.subjectMin||{}).reduce((a,b)=>a+b,0)),i:"📚",c:"#60a5fa"},{l:"Km total",v:fmtKm(char.stats.totalKm),i:"🏃",c:"#34d399"}].map((s,i)=>(
               <Card key={i} style={{padding:"10px",textAlign:"center"}}><div style={{fontSize:17,marginBottom:3}}>{s.i}</div><div style={{fontFamily:"Cinzel,serif",fontSize:13,color:s.c,fontWeight:700}}>{s.v}</div><div style={{fontSize:8,color:"#444",letterSpacing:1,marginTop:1}}>{s.l.toUpperCase()}</div></Card>
             ))}
           </div>
+
+          {/* Habits today */}
+          {totalHabits>0&&<Card glow="#34d39933" style={{marginBottom:10}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+              <Lbl mb={0}>HÁBITOS DO DIA</Lbl>
+              <span style={{fontFamily:"Cinzel,serif",fontSize:12,color:"#34d399"}}>{habitsToday}/{totalHabits}</span>
+            </div>
+            <div style={{height:5,background:"#1a1838",borderRadius:3,overflow:"hidden",marginBottom:8}}>
+              <div style={{height:"100%",width:`${totalHabits?pct(habitsToday,totalHabits):0}%`,background:"linear-gradient(90deg,#34d39977,#34d399)",borderRadius:3,transition:"width 0.4s"}}/>
+            </div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+              {(char.habits||[]).map(h=>{const done=!!h.log?.[todayStr()];return(
+                <button key={h.id} className="tbtn" onClick={()=>toggleHabit(h.id)} style={{padding:"6px 10px",borderRadius:20,border:`1px solid ${done?h.color:h.color+"44"}`,background:done?h.color+"22":"transparent",display:"flex",alignItems:"center",gap:5}}>
+                  <span style={{fontSize:14}}>{done?"✓":h.icon}</span>
+                  <span style={{fontSize:10,fontFamily:"Cinzel,serif",color:done?h.color:"#555"}}>{h.name}</span>
+                </button>
+              );})}
+            </div>
+          </Card>}
+
+          {/* XP Chart */}
+          <Card style={{marginBottom:10}}>
+            <MiniBarChart data={last7} color="#f0c040" height={55} label="XP ÚLTIMOS 7 DIAS"/>
+          </Card>
+
           <Card glow={remaining<0?"#ef444455":"#22c55e33"} style={{marginBottom:10}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}><Lbl mb={0}>SAÚDE FINANCEIRA</Lbl><span style={{fontFamily:"Cinzel,serif",fontSize:13,color:remaining>=0?"#22c55e":"#ef4444"}}>{curr(remaining)} livre</span></div>
             <div style={{height:7,background:"#1a1838",borderRadius:3,overflow:"hidden",marginBottom:4}}><div style={{height:"100%",width:`${Math.min(100,(paidExp/salary)*100)}%`,background:"linear-gradient(90deg,#22c55e77,#22c55e)",borderRadius:3,transition:"width 0.5s"}}/></div>
             <div style={{display:"flex",justifyContent:"space-between"}}><span style={{fontSize:9,color:"#555"}}>Pago: {curr(paidExp)}</span><span style={{fontSize:9,color:"#555"}}>{curr(totalExp)} / {curr(salary)}</span></div>
           </Card>
-          {bmi&&<Card glow={bmiC.c+"44"} style={{marginBottom:10}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}><div><Lbl mb={2}>IMC</Lbl><div style={{fontFamily:"Cinzel,serif",fontSize:22,color:bmiC.c,fontWeight:700}}>{bmi}</div><div style={{fontSize:11,color:bmiC.c}}>{bmiC.l}</div><div style={{fontSize:10,color:"#666",marginTop:2}}>{bmiC.t}</div></div><div style={{textAlign:"right",fontSize:11,color:"#555"}}><div>{char.body.weight} kg</div><div>{char.body.height} cm</div></div></div></Card>}
+
+          {bmi&&<Card glow={bmiC.c+"44"} style={{marginBottom:10}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}><div><Lbl mb={2}>IMC</Lbl><div style={{fontFamily:"Cinzel,serif",fontSize:22,color:bmiC.c,fontWeight:700}}>{bmi}</div><div style={{fontSize:11,color:bmiC.c}}>{bmiC.l}</div></div><div style={{textAlign:"right",fontSize:11,color:"#555"}}><div>{char.body.weight} kg</div><div>{char.body.height} cm</div></div></div></Card>}
+
           {readingBooks.length>0&&<Card glow="#60a5fa33" style={{marginBottom:10}}>
-            <Lbl mb={6}>LENDO AGORA — {readingBooks.length} LIVRO{readingBooks.length>1?"S":""}</Lbl>
+            <Lbl mb={6}>LENDO AGORA — {readingBooks.length}</Lbl>
             {readingBooks.map((b,i)=><div key={b.id||i} style={{marginBottom:i<readingBooks.length-1?8:0}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}><span style={{fontSize:12}}>📖 <span style={{color:"#aaa"}}>{b.title}</span></span><span style={{fontFamily:"Cinzel,serif",fontSize:12,color:"#60a5fa"}}>{pct(b.page,b.total)}%</span></div>
               <div style={{height:4,background:"#1a1838",borderRadius:3,overflow:"hidden"}}><div style={{height:"100%",width:`${pct(b.page,b.total)}%`,background:"linear-gradient(90deg,#60a5fa77,#60a5fa)",borderRadius:3}}/></div>
             </div>)}
           </Card>}
+
+          {/* Conquistas resumo */}
+          <Card style={{marginBottom:10}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <Lbl mb={0}>CONQUISTAS</Lbl>
+              <span style={{fontFamily:"Cinzel,serif",fontSize:12,color:"#f0c040"}}>{unlockedCount}/{ACHIEVEMENTS.length}</span>
+            </div>
+            <div style={{height:5,background:"#1a1838",borderRadius:3,overflow:"hidden",marginTop:6}}>
+              <div style={{height:"100%",width:`${pct(unlockedCount,ACHIEVEMENTS.length)}%`,background:"linear-gradient(90deg,#f0c04077,#f0c040)",borderRadius:3,transition:"width 0.4s"}}/>
+            </div>
+          </Card>
         </div>}
 
-        {/* DAILY */}
+        {/* ── DAILY ── */}
         {tab==="daily"&&<div style={{padding:"12px 12px 0"}}>
-          <STabs tabs={[{id:"missoes",i:"⚔️",l:"Missões",c:"#f0c040"},{id:"boss",i:"👹",l:"Boss",c:"#8b5cf6"},{id:"streak",i:"🔥",l:"Streak",c:"#f97316"}]} val={dailyTab} onChange={setDailyTab}/>
+          <STabs tabs={[{id:"missoes",i:"⚔️",l:"Missões",c:"#f0c040"},{id:"habitos",i:"🌱",l:"Hábitos",c:"#34d399"},{id:"boss",i:"👹",l:"Boss",c:"#8b5cf6"},{id:"streak",i:"🔥",l:"Streak",c:"#f97316"}]} val={dailyTab} onChange={setDailyTab}/>
+
           {dailyTab==="missoes"&&<>
             {(()=>{const cores=QUESTS.filter(q=>q.core),done=cores.filter(q=>quests[q.id]).length,all=done===cores.length;return<div style={{background:all?"linear-gradient(135deg,#0a2010,#0d2a14)":"#0f0f1e",border:`1px solid ${all?"#22c55e55":"#2a1e0a"}`,borderRadius:10,padding:"9px 12px",marginBottom:10,display:"flex",alignItems:"center",gap:8,animation:all?"gpulse 3s infinite":"none"}}><span style={{fontSize:18}}>{all?"🏆":"🎯"}</span><div><div style={{fontFamily:"Cinzel,serif",fontSize:9,color:all?"#22c55e":"#f0c040",letterSpacing:1}}>{all?"COMPLETO! +20 XP BÔNUS":`${done}/${cores.length} MISSÕES PRINCIPAIS`}</div><div style={{fontSize:10,color:"#555"}}>Estudar + Treinar + Dormir bem</div></div></div>;})()}
             {["mente","corpo","disciplina"].map(cat=><div key={cat} style={{marginBottom:10}}>
@@ -845,6 +1103,53 @@ export default function App(){
             <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:7}}><div style={{height:1,flex:1,background:"linear-gradient(90deg,#ef444444,transparent)"}}/><span style={{fontFamily:"Cinzel,serif",fontSize:9,color:"#ef4444",letterSpacing:2}}>PENALIDADES</span><div style={{height:1,flex:1,background:"linear-gradient(270deg,#ef444444,transparent)"}}/></div>
             {PENALTIES.map(pen=>{const on=!!pens[pen.id];return<button key={pen.id} className="btn" onClick={()=>togglePen(pen)} style={{marginBottom:5}}><div style={{background:on?"#1e0808":"#0f0f1e",border:`1px solid ${on?"#ef444466":"#1a1838"}`,borderRadius:10,padding:"9px 12px",display:"flex",alignItems:"center",gap:10}}><div style={{width:20,height:20,borderRadius:5,border:`2px solid ${on?"#ef4444":"#2a2848"}`,background:on?"#ef444433":"transparent",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{on&&<span style={{color:"#ef4444",fontSize:11,fontWeight:900}}>✗</span>}</div><span style={{fontSize:16}}>{pen.icon}</span><span style={{flex:1,fontSize:13,color:on?"#ef9999":"#777"}}>{pen.label}</span><span style={{fontFamily:"Cinzel,serif",fontWeight:700,color:"#ef4444",fontSize:11}}>{pen.xp}</span></div></button>;})}
           </>}
+
+          {dailyTab==="habitos"&&<>
+            <button className="sbtn" onClick={()=>setAddingHabit(v=>!v)} style={{background:"#0f0f1e",border:"1px solid #34d39944",color:"#34d399",fontSize:10,letterSpacing:2,marginBottom:10}}>{addingHabit?"✕ CANCELAR":"+ NOVO HÁBITO"}</button>
+            {addingHabit&&<Card style={{marginBottom:10}}>
+              <Lbl>CRIAR HÁBITO</Lbl>
+              <input className="inp" value={newHabitName} onChange={e=>setNewHabitName(e.target.value)} placeholder="Nome do hábito" style={{marginBottom:7}}/>
+              <div style={{display:"flex",gap:5,marginBottom:8}}>
+                {[{id:"daily",l:"Diário"},{id:"weekly",l:"Semanal"}].map(f=><button key={f.id} className="tbtn" onClick={()=>setNewHabitFreq(f.id)} style={{flex:1,padding:"7px",borderRadius:8,border:`1px solid ${newHabitFreq===f.id?"#34d39966":"#2a2848"}`,background:newHabitFreq===f.id?"#34d39922":"#0f0f1e",color:newHabitFreq===f.id?"#34d399":"#555",fontFamily:"Cinzel,serif",fontSize:9}}>{f.l}</button>)}
+              </div>
+              <div style={{display:"flex",gap:5,marginBottom:8,flexWrap:"wrap"}}>
+                {HABIT_ICONS.map(ic=><button key={ic} className="tbtn" onClick={()=>setNewHabitIcon(ic)} style={{fontSize:18,opacity:newHabitIcon===ic?1:0.3}}>{ic}</button>)}
+              </div>
+              <div style={{display:"flex",gap:5,marginBottom:10,flexWrap:"wrap"}}>
+                {HABIT_COLORS.map(c=><button key={c} className="tbtn" onClick={()=>setNewHabitColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`2px solid ${newHabitColor===c?"#fff":"transparent"}`,flexShrink:0}}/>)}
+              </div>
+              <button className="sbtn" onClick={addHabit} style={{background:`linear-gradient(135deg,${newHabitColor}22,${newHabitColor}11)`,border:`1px solid ${newHabitColor}55`,color:newHabitColor,fontSize:11}}>✓ CRIAR</button>
+            </Card>}
+
+            {(char.habits||[]).length===0&&!addingHabit&&<div style={{textAlign:"center",padding:"30px 0",color:"#444",fontSize:12}}>
+              <div style={{fontSize:36,marginBottom:8}}>🌱</div>
+              <div>Nenhum hábito ainda</div>
+              <div style={{fontSize:10,marginTop:4,color:"#333"}}>Crie hábitos para ganhar +5 XP por dia</div>
+            </div>}
+
+            {(char.habits||[]).map(h=>{
+              const done=!!h.log?.[todayStr()];
+              // streak do hábito
+              let hStreak=0;
+              const d2=new Date();
+              for(let i=0;i<60;i++){const ds=`${d2.getFullYear()}-${String(d2.getMonth()+1).padStart(2,"0")}-${String(d2.getDate()).padStart(2,"0")}`;if(h.log?.[ds]) hStreak++; else break;d2.setDate(d2.getDate()-1);}
+              return(
+                <div key={h.id} style={{background:done?`linear-gradient(135deg,${h.color}18,${h.color}08)`:"#0f0f1e",border:`1px solid ${done?h.color+"66":"#1a1838"}`,borderRadius:12,padding:"11px 13px",marginBottom:7}}>
+                  <div style={{display:"flex",alignItems:"center",gap:10}}>
+                    <button className="tbtn" onClick={()=>toggleHabit(h.id)} style={{width:26,height:26,borderRadius:6,border:`2px solid ${done?h.color:"#2a2848"}`,background:done?h.color+"33":"transparent",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:14}}>
+                      {done?"✓":h.icon}
+                    </button>
+                    <div style={{flex:1}}>
+                      <div style={{fontSize:13,color:done?"#e8dfc0":"#aaa"}}>{h.name}</div>
+                      <div style={{fontSize:9,color:"#555",fontFamily:"Cinzel,serif"}}>{h.freq==="weekly"?"SEMANAL":"DIÁRIO"} · 🔥{hStreak}d · +5 XP</div>
+                    </div>
+                    <button className="tbtn" onClick={()=>removeHabit(h.id)} style={{color:"#333",fontSize:12}}>🗑</button>
+                  </div>
+                </div>
+              );
+            })}
+          </>}
+
           {dailyTab==="boss"&&<Card glow={bossComplete&&!char.boss?.claimed?"#f0c04077":char.boss?.claimed?"#22c55e55":"#2a2248"} anim={bossComplete&&!char.boss?.claimed?"pulse 2s infinite":"none"}>
             <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}><span style={{fontSize:26}}>{boss.icon}</span><div style={{flex:1}}><Lbl mb={2}>BOSS SEMANAL</Lbl><div style={{fontSize:15,color:"#e8dfc0"}}>{boss.name}</div></div><span style={{fontFamily:"Cinzel,serif",fontSize:13,color:"#f0c040",fontWeight:700}}>+{boss.xp} XP</span></div>
             <div style={{fontSize:12,color:"#666",marginBottom:10}}>{boss.desc}</div>
@@ -852,68 +1157,46 @@ export default function App(){
             {bossComplete&&!char.boss?.claimed&&<button className="sbtn" onClick={claimBoss} style={{marginTop:10,background:"linear-gradient(135deg,#f0c040,#d4a017)",color:"#000",fontWeight:700,fontSize:13}}>⚔️ REIVINDICAR +{boss.xp} XP</button>}
             {char.boss?.claimed&&<div style={{marginTop:8,textAlign:"center",fontSize:11,color:"#22c55e",fontFamily:"Cinzel,serif",letterSpacing:1}}>✓ BOSS DERROTADO ESTA SEMANA</div>}
           </Card>}
-          {dailyTab==="streak"&&<Card glow={streak>=7?"#f9731666":"#2a1e0a"} style={{textAlign:"center",padding:"22px 14px"}}>
-            <div style={{fontSize:44,marginBottom:6}}>{streak>=30?"🔥":streak>=7?"⚡":"💤"}</div>
-            <div style={{fontFamily:"Cinzel,serif",fontSize:36,fontWeight:900,color:"#f97316"}}>{streak}</div>
-            <div style={{fontFamily:"Cinzel,serif",fontSize:10,color:"#f9731699",letterSpacing:3,margin:"4px 0 10px"}}>DIAS CONSECUTIVOS</div>
-            {multi>1&&<div style={{background:"#f9731622",border:"1px solid #f9731644",borderRadius:8,padding:"6px 14px",display:"inline-block",fontFamily:"Cinzel,serif",fontSize:12,color:"#f97316"}}>✨ ×{multi.toFixed(2)} ATIVO</div>}
-            <div style={{marginTop:14,display:"flex",justifyContent:"space-around"}}>
-              {[{l:"Recorde",v:char.streak?.best||0,c:"#f0c040"},{l:"Dias ativos",v:char.stats.activeDays||0,c:"#a78bfa"},{l:"Missões",v:char.stats.totalQuests||0,c:"#34d399"}].map((s,i)=><div key={i}><div style={{fontFamily:"Cinzel,serif",fontSize:20,color:s.c}}>{s.v}</div><div style={{fontSize:9,color:"#555"}}>{s.l}</div></div>)}
-            </div>
-          </Card>}
+
+          {dailyTab==="streak"&&<>
+            <Card glow={streak>=7?"#f9731666":"#2a1e0a"} style={{textAlign:"center",padding:"22px 14px",marginBottom:10}}>
+              <div style={{fontSize:44,marginBottom:6}}>{streak>=30?"🔥":streak>=7?"⚡":"💤"}</div>
+              <div style={{fontFamily:"Cinzel,serif",fontSize:36,fontWeight:900,color:"#f97316"}}>{streak}</div>
+              <div style={{fontFamily:"Cinzel,serif",fontSize:10,color:"#f9731699",letterSpacing:3,margin:"4px 0 10px"}}>DIAS CONSECUTIVOS</div>
+              {multi>1&&<div style={{background:"#f9731622",border:"1px solid #f9731644",borderRadius:8,padding:"6px 14px",display:"inline-block",fontFamily:"Cinzel,serif",fontSize:12,color:"#f97316",marginBottom:10}}>✨ ×{multi.toFixed(2)} ATIVO</div>}
+              <div style={{display:"flex",justifyContent:"space-around"}}>
+                {[{l:"Recorde",v:char.streak?.best||0,c:"#f0c040"},{l:"Dias ativos",v:char.stats.activeDays||0,c:"#a78bfa"},{l:"Missões",v:char.stats.totalQuests||0,c:"#34d399"}].map((s,i)=><div key={i}><div style={{fontFamily:"Cinzel,serif",fontSize:20,color:s.c}}>{s.v}</div><div style={{fontSize:9,color:"#555"}}>{s.l}</div></div>)}
+              </div>
+            </Card>
+            {/* Mood history */}
+            <Card>
+              <Lbl mb={8}>HUMOR — ÚLTIMOS 14 DIAS</Lbl>
+              <div style={{display:"flex",gap:3,flexWrap:"wrap"}}>
+                {(()=>{const days=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;days.push(ds);}return days.map(ds=>{const entry=(char.moodLog||[]).find(m=>m.date===ds);const mood=entry?MOODS.find(m=>m.id===entry.mood):null;return<div key={ds} title={ds} style={{width:20,height:20,borderRadius:5,background:mood?mood.color+"33":"#1a1838",border:`1px solid ${mood?mood.color+"55":"transparent"}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11}}>{mood?.icon||""}</div>;});})()}
+              </div>
+            </Card>
+          </>}
         </div>}
 
-        {/* STUDY */}
+        {/* ── STUDY ── */}
         {tab==="study"&&<div style={{padding:"12px 12px 0"}}>
-          {/* Concurso selector + management */}
+          {/* Concurso selector */}
           <div style={{display:"flex",gap:5,marginBottom:6}}>
             <select className="inp" style={{flex:1}} value={char.activeConcurso} onChange={e=>switchConcurso(e.target.value)}>
               {(char.concursos||[]).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
             <button className="tbtn" onClick={()=>setAddingConcurso(v=>!v)} style={{background:"#1a1535",border:"1px solid #a78bfa55",color:"#a78bfa",borderRadius:8,padding:"9px 12px",fontFamily:"Cinzel,serif",fontSize:10,flexShrink:0}}>+ NOVO</button>
           </div>
-
-          {/* Concurso action buttons */}
           <div style={{display:"flex",gap:5,marginBottom:10}}>
-            <button className="tbtn" onClick={()=>{
-              setEditingConcursoId(ac?.id);
-              setEditingSubjects(v=>!v);
-              setRenamingConcId(null);
-            }} style={{flex:1,padding:"6px 0",borderRadius:7,border:"1px solid #60a5fa44",background:editingSubjects&&editingConcursoId===ac?.id?"#0a1a2a":"transparent",color:"#60a5fa",fontFamily:"Cinzel,serif",fontSize:9}}>
-              ✎ MATÉRIAS
-            </button>
-            <button className="tbtn" onClick={()=>{
-              setRenamingConcId(ac?.id);
-              setRenamingConcName(ac?.name||"");
-              setEditingSubjects(false);
-            }} style={{flex:1,padding:"6px 0",borderRadius:7,border:"1px solid #f0c04044",background:renamingConcId===ac?.id?"#1a1400":"transparent",color:"#f0c040",fontFamily:"Cinzel,serif",fontSize:9}}>
-              ✎ RENOMEAR
-            </button>
-            <button className="tbtn" onClick={()=>deleteConcurso(ac?.id)} style={{padding:"6px 10px",borderRadius:7,border:"1px solid #ef444433",background:"transparent",color:"#ef4444",fontSize:12}}>
-              🗑
-            </button>
+            <button className="tbtn" onClick={()=>{setEditingConcursoId(ac?.id);setEditingSubjects(v=>!v);setRenamingConcId(null);}} style={{flex:1,padding:"6px 0",borderRadius:7,border:"1px solid #60a5fa44",background:editingSubjects&&editingConcursoId===ac?.id?"#0a1a2a":"transparent",color:"#60a5fa",fontFamily:"Cinzel,serif",fontSize:9}}>✎ MATÉRIAS</button>
+            <button className="tbtn" onClick={()=>{setRenamingConcId(ac?.id);setRenamingConcName(ac?.name||"");setEditingSubjects(false);}} style={{flex:1,padding:"6px 0",borderRadius:7,border:"1px solid #f0c04044",background:renamingConcId===ac?.id?"#1a1400":"transparent",color:"#f0c040",fontFamily:"Cinzel,serif",fontSize:9}}>✎ RENOMEAR</button>
+            <button className="tbtn" onClick={()=>deleteConcurso(ac?.id)} style={{padding:"6px 10px",borderRadius:7,border:"1px solid #ef444433",background:"transparent",color:"#ef4444",fontSize:12}}>🗑</button>
           </div>
+          {renamingConcId===ac?.id&&<div style={{display:"flex",gap:5,marginBottom:10}}><input className="inp" value={renamingConcName} onChange={e=>setRenamingConcName(e.target.value)} placeholder="Novo nome..."/><button className="tbtn" onClick={renameConcurso} style={{background:"#1a1400",border:"1px solid #f0c04055",color:"#f0c040",borderRadius:8,padding:"9px 13px",fontFamily:"Cinzel,serif",fontSize:11,flexShrink:0}}>OK</button><button className="tbtn" onClick={()=>setRenamingConcId(null)} style={{color:"#555",fontSize:16,flexShrink:0}}>✕</button></div>}
+          {addingConcurso&&<div style={{display:"flex",gap:5,marginBottom:10}}><input className="inp" value={newConcName} onChange={e=>setNewConcName(e.target.value)} placeholder="Nome do concurso..."/><button className="tbtn" onClick={addConcurso} style={{background:"#1a1535",border:"1px solid #a78bfa55",color:"#a78bfa",borderRadius:8,padding:"9px 13px",fontFamily:"Cinzel,serif",fontSize:11,flexShrink:0}}>OK</button><button className="tbtn" onClick={()=>setAddingConcurso(false)} style={{color:"#555",fontSize:16,flexShrink:0}}>✕</button></div>}
 
-          {/* Rename concurso inline */}
-          {renamingConcId===ac?.id&&<div style={{display:"flex",gap:5,marginBottom:10}}>
-            <input className="inp" value={renamingConcName} onChange={e=>setRenamingConcName(e.target.value)} placeholder="Novo nome..."/>
-            <button className="tbtn" onClick={renameConcurso} style={{background:"#1a1400",border:"1px solid #f0c04055",color:"#f0c040",borderRadius:8,padding:"9px 13px",fontFamily:"Cinzel,serif",fontSize:11,flexShrink:0}}>OK</button>
-            <button className="tbtn" onClick={()=>setRenamingConcId(null)} style={{color:"#555",fontSize:16,flexShrink:0}}>✕</button>
-          </div>}
-
-          {/* Add concurso inline */}
-          {addingConcurso&&<div style={{display:"flex",gap:5,marginBottom:10}}>
-            <input className="inp" value={newConcName} onChange={e=>setNewConcName(e.target.value)} placeholder="Nome do concurso..."/>
-            <button className="tbtn" onClick={addConcurso} style={{background:"#1a1535",border:"1px solid #a78bfa55",color:"#a78bfa",borderRadius:8,padding:"9px 13px",fontFamily:"Cinzel,serif",fontSize:11,flexShrink:0}}>OK</button>
-            <button className="tbtn" onClick={()=>setAddingConcurso(false)} style={{color:"#555",fontSize:16,flexShrink:0}}>✕</button>
-          </div>}
-
-          {/* Edit subjects panel */}
           {editingSubjects&&editingConcursoId===ac?.id&&<Card glow="#60a5fa33" style={{marginBottom:10}}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-              <Lbl mb={0} color="#60a5fa">MATÉRIAS — {ac?.name}</Lbl>
-              <button className="tbtn" onClick={()=>setEditingSubjects(false)} style={{color:"#555",fontSize:16}}>✕</button>
-            </div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}><Lbl mb={0} color="#60a5fa">MATÉRIAS — {ac?.name}</Lbl><button className="tbtn" onClick={()=>setEditingSubjects(false)} style={{color:"#555",fontSize:16}}>✕</button></div>
             {(ac?.subjects||[]).map(sub=>(
               <div key={sub.id} style={{display:"flex",alignItems:"center",gap:8,marginBottom:6,background:"#0a0a18",borderRadius:8,padding:"7px 10px"}}>
                 <span style={{fontSize:16}}>{sub.icon}</span>
@@ -925,46 +1208,52 @@ export default function App(){
             <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid #1a1838"}}>
               <Lbl color="#34d399" mb={6}>+ NOVA MATÉRIA</Lbl>
               <input className="inp" value={newSubName} onChange={e=>setNewSubName(e.target.value)} placeholder="Nome da matéria" style={{marginBottom:7}}/>
-              <div style={{display:"flex",gap:6,marginBottom:7,flexWrap:"wrap"}}>
-                {SUBJECT_ICONS.map(ic=><button key={ic} className="tbtn" onClick={()=>setNewSubIcon(ic)} style={{fontSize:18,opacity:newSubIcon===ic?1:0.3}}>{ic}</button>)}
-              </div>
-              <div style={{display:"flex",gap:5,marginBottom:9,flexWrap:"wrap"}}>
-                {SUBJECT_COLORS.map(c=><button key={c} className="tbtn" onClick={()=>setNewSubColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`2px solid ${newSubColor===c?"#fff":"transparent"}`,flexShrink:0}}/>)}
-              </div>
-              <button className="sbtn" onClick={addSubject} style={{background:`linear-gradient(135deg,${newSubColor}22,${newSubColor}11)`,border:`1px solid ${newSubColor}55`,color:newSubColor,fontSize:10,letterSpacing:1}}>+ ADICIONAR MATÉRIA</button>
+              <div style={{display:"flex",gap:6,marginBottom:7,flexWrap:"wrap"}}>{SUBJECT_ICONS.map(ic=><button key={ic} className="tbtn" onClick={()=>setNewSubIcon(ic)} style={{fontSize:18,opacity:newSubIcon===ic?1:0.3}}>{ic}</button>)}</div>
+              <div style={{display:"flex",gap:5,marginBottom:9,flexWrap:"wrap"}}>{SUBJECT_COLORS.map(c=><button key={c} className="tbtn" onClick={()=>setNewSubColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`2px solid ${newSubColor===c?"#fff":"transparent"}`,flexShrink:0}}/>)}</div>
+              <button className="sbtn" onClick={addSubject} style={{background:`linear-gradient(135deg,${newSubColor}22,${newSubColor}11)`,border:`1px solid ${newSubColor}55`,color:newSubColor,fontSize:10}}>+ ADICIONAR MATÉRIA</button>
             </div>
           </Card>}
 
-          <STabs tabs={[{id:"timer",i:"⏱️",l:"Estudo",c:"#60a5fa"},{id:"questoes",i:"🎯",l:"Questões",c:"#a78bfa"},{id:"livros",i:"📖",l:"Livros",c:"#f0c040"}]} val={studyTab} onChange={setStudyTab}/>
+          <STabs tabs={[{id:"timer",i:"⏱️",l:"Estudo",c:"#60a5fa"},{id:"questoes",i:"🎯",l:"Questões",c:"#a78bfa"},{id:"simulado",i:"📋",l:"Simulado",c:"#f97316"},{id:"livros",i:"📖",l:"Livros",c:"#f0c040"}]} val={studyTab} onChange={setStudyTab}/>
 
-          {/* TIMER TAB — now start/end time */}
+          {/* TIMER */}
           {studyTab==="timer"&&<>
             {(ac?.subjects||[]).length===0?(
-              <Card style={{textAlign:"center",padding:"20px"}}>
-                <div style={{fontSize:32,marginBottom:8}}>📚</div>
-                <div style={{fontSize:12,color:"#555",marginBottom:10}}>Nenhuma matéria cadastrada</div>
-                <button className="sbtn" onClick={()=>{setEditingConcursoId(ac?.id);setEditingSubjects(true);}} style={{background:"#1a1535",border:"1px solid #60a5fa55",color:"#60a5fa",fontSize:10}}>+ ADICIONAR MATÉRIAS</button>
-              </Card>
+              <Card style={{textAlign:"center",padding:"20px"}}><div style={{fontSize:32,marginBottom:8}}>📚</div><div style={{fontSize:12,color:"#555",marginBottom:10}}>Nenhuma matéria cadastrada</div><button className="sbtn" onClick={()=>{setEditingConcursoId(ac?.id);setEditingSubjects(true);}} style={{background:"#1a1535",border:"1px solid #60a5fa55",color:"#60a5fa",fontSize:10}}>+ ADICIONAR MATÉRIAS</button></Card>
             ):<>
               <Lbl>MATÉRIA — {ac?.name?.toUpperCase()}</Lbl>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,marginBottom:12}}>
                 {(ac?.subjects||[]).map(sub=>{
                   const mins=(ac.subjectMin||{})[sub.id]||0;
+                  const goal=(char.studyGoals||{})[sub.id];
                   const isSelected=timerSub===sub.id;
                   return<button key={sub.id} className="tbtn" onClick={()=>setTimerSub(isSelected?null:sub.id)} style={{width:"100%"}}>
-                    <div style={{background:isSelected?`linear-gradient(135deg,${sub.color}28,${sub.color}12)`:`linear-gradient(135deg,${sub.color}14,${sub.color}06)`,border:`2px solid ${isSelected?sub.color:sub.color+"44"}`,borderRadius:11,padding:"11px 10px",textAlign:"center",transition:"all 0.15s"}}>
+                    <div style={{background:isSelected?`linear-gradient(135deg,${sub.color}28,${sub.color}12)`:`linear-gradient(135deg,${sub.color}14,${sub.color}06)`,border:`2px solid ${isSelected?sub.color:sub.color+"44"}`,borderRadius:11,padding:"11px 10px",textAlign:"center",transition:"all 0.15s",position:"relative"}}>
+                      {goal&&<div style={{position:"absolute",top:5,right:7,fontSize:8,color:mins>=goal?"#22c55e":"#555",fontFamily:"Cinzel,serif"}}>{Math.min(100,Math.round(mins/goal*100))}%</div>}
                       <div style={{fontSize:20,marginBottom:3}}>{sub.icon}</div>
                       <div style={{fontFamily:"Cinzel,serif",fontSize:8,color:sub.color,letterSpacing:1,marginBottom:2}}>{sub.name?.split(" ")[0]?.toUpperCase()}</div>
-                      <div style={{fontSize:10,color:"#555",marginBottom:5}}>{mins>0?fmtHM(mins):"—"}</div>
-                      <div style={{background:isSelected?sub.color:sub.color+"88",color:"#000",borderRadius:5,padding:"3px 0",fontFamily:"Cinzel,serif",fontSize:8,fontWeight:700}}>{isSelected?"✓ SELECIONADA":"SELECIONAR"}</div>
+                      <div style={{fontSize:10,color:"#555",marginBottom:2}}>{mins>0?fmtHM(mins):"—"}</div>
+                      {goal&&<div style={{height:2,background:"#1a1838",borderRadius:1,overflow:"hidden",marginBottom:4}}><div style={{height:"100%",width:`${Math.min(100,pct(mins,goal))}%`,background:sub.color,borderRadius:1}}/></div>}
+                      {goal&&<div style={{fontSize:8,color:"#555"}}>Meta: {fmtHM(goal)}</div>}
+                      <div style={{background:isSelected?sub.color:sub.color+"88",color:"#000",borderRadius:5,padding:"3px 0",fontFamily:"Cinzel,serif",fontSize:8,fontWeight:700,marginTop:4}}>{isSelected?"✓ SELECIONADA":"SELECIONAR"}</div>
+                      {/* Goal edit */}
+                      {isSelected&&<button className="tbtn" onClick={e=>{e.stopPropagation();setEditingGoal(editingGoal===sub.id?null:sub.id);setGoalInput(goal?String(goal):"");}} style={{marginTop:5,fontSize:8,color:"#555",fontFamily:"Cinzel,serif",letterSpacing:1}}>✎ META</button>}
                     </div>
                   </button>;
                 })}
               </div>
 
-              {/* Session registration */}
+              {editingGoal&&<div style={{display:"flex",gap:6,marginBottom:10,background:"#0f0f1e",border:"1px solid #60a5fa33",borderRadius:9,padding:"10px 12px"}}>
+                <div style={{flex:1}}>
+                  <div style={{fontSize:9,color:"#555",marginBottom:4}}>META SEMANAL (minutos)</div>
+                  <input className="inp" value={goalInput} onChange={e=>setGoalInput(e.target.value)} type="number" placeholder="Ex: 300 = 5h" style={{padding:"7px 10px"}}/>
+                </div>
+                <button className="tbtn" onClick={()=>saveGoal(editingGoal)} style={{background:"#0a1a2a",border:"1px solid #60a5fa55",color:"#60a5fa",borderRadius:8,padding:"9px 13px",fontFamily:"Cinzel,serif",fontSize:9,flexShrink:0,alignSelf:"flex-end"}}>OK</button>
+                <button className="tbtn" onClick={()=>setEditingGoal(null)} style={{color:"#555",fontSize:16,alignSelf:"center",flexShrink:0}}>✕</button>
+              </div>}
+
               <Card glow={timerSub?"#60a5fa33":"#1a1838"} style={{marginBottom:10}}>
-                <Lbl color="#60a5fa" mb={8}>REGISTRAR SESSÃO DE ESTUDO</Lbl>
+                <Lbl color="#60a5fa" mb={8}>REGISTRAR SESSÃO</Lbl>
                 {timerSub?(()=>{
                   const sub=(ac?.subjects||[]).find(s=>s.id===timerSub)||{icon:"📚",color:"#60a5fa",name:"Estudo"};
                   return <>
@@ -977,9 +1266,7 @@ export default function App(){
                         <div style={{fontSize:9,color:"#555",fontFamily:"Cinzel,serif",letterSpacing:1,marginBottom:4}}>HORA INÍCIO</div>
                         <input className="inp" type="time" value={studyStart} onChange={e=>setStudyStart(e.target.value)} style={{textAlign:"center",fontSize:18,fontFamily:"Cinzel,serif",color:"#60a5fa",padding:"10px 8px"}}/>
                       </div>
-                      <div style={{display:"flex",alignItems:"center",paddingTop:20}}>
-                        <span style={{color:"#333",fontSize:20}}>→</span>
-                      </div>
+                      <div style={{display:"flex",alignItems:"center",paddingTop:20}}><span style={{color:"#333",fontSize:20}}>→</span></div>
                       <div style={{flex:1}}>
                         <div style={{fontSize:9,color:"#555",fontFamily:"Cinzel,serif",letterSpacing:1,marginBottom:4}}>HORA FIM</div>
                         <input className="inp" type="time" value={studyEnd} onChange={e=>setStudyEnd(e.target.value)} style={{textAlign:"center",fontSize:18,fontFamily:"Cinzel,serif",color:"#60a5fa",padding:"10px 8px"}}/>
@@ -999,16 +1286,25 @@ export default function App(){
               </Card>
 
               <Lbl>TEMPO TOTAL POR MATÉRIA</Lbl>
-              {(ac?.subjects||[]).map(sub=>{const mins=(ac.subjectMin||{})[sub.id]||0,mx=Math.max(...(ac.subjects||[]).map(s=>(ac.subjectMin||{})[s.id]||0),1);return<div key={sub.id} style={{background:"#0f0f1e",border:"1px solid #1a1838",borderRadius:8,padding:"7px 12px",marginBottom:4}}><div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}><span style={{fontSize:12}}>{sub.icon} <span style={{color:"#888"}}>{sub.name}</span></span><span style={{fontFamily:"Cinzel,serif",fontSize:10,color:mins>0?sub.color:"#333"}}>{mins>0?fmtHM(mins):"—"}</span></div><div style={{height:3,background:"#1a1838",borderRadius:2,overflow:"hidden"}}><div style={{height:"100%",width:`${(mins/mx)*100}%`,background:sub.color,borderRadius:2,transition:"width 0.4s"}}/></div></div>;})}
+              {(ac?.subjects||[]).map(sub=>{const mins=(ac.subjectMin||{})[sub.id]||0,mx=Math.max(...(ac.subjects||[]).map(s=>(ac.subjectMin||{})[s.id]||0),1);const goal=(char.studyGoals||{})[sub.id];return<div key={sub.id} style={{background:"#0f0f1e",border:"1px solid #1a1838",borderRadius:8,padding:"7px 12px",marginBottom:4}}><div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}><span style={{fontSize:12}}>{sub.icon} <span style={{color:"#888"}}>{sub.name}</span></span><span style={{fontFamily:"Cinzel,serif",fontSize:10,color:mins>0?sub.color:"#333"}}>{mins>0?fmtHM(mins):"—"}{goal?` / ${fmtHM(goal)}`:""}</span></div><div style={{height:3,background:"#1a1838",borderRadius:2,overflow:"hidden"}}><div style={{height:"100%",width:`${goal?Math.min(100,pct(mins,goal)):(mins/mx)*100}%`,background:goal&&mins>=goal?"#22c55e":sub.color,borderRadius:2,transition:"width 0.4s"}}/></div></div>;})}
+
+              {/* Study chart */}
+              {subjectChartData.some(d=>d.v>0)&&<Card style={{marginTop:10}}>
+                <Lbl mb={8}>HORAS POR MATÉRIA</Lbl>
+                <div style={{display:"flex",alignItems:"flex-end",gap:3,height:55}}>
+                  {subjectChartData.map((d,i)=>{const mx2=Math.max(...subjectChartData.map(x=>x.v),0.1);return<div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2}}>
+                    <div style={{width:"100%",height:Math.max(2,(d.v/mx2)*43),background:d.v>0?d.color:"#1a1838",borderRadius:"3px 3px 0 0",transition:"height 0.3s"}}/>
+                    <div style={{fontSize:7,color:"#444",fontFamily:"Cinzel,serif"}}>{d.l}</div>
+                  </div>;})}
+                </div>
+              </Card>}
             </>}
           </>}
 
-          {/* QUESTÕES TAB */}
+          {/* QUESTÕES */}
           {studyTab==="questoes"&&<>
             {(ac?.subjects||[]).length===0?(
-              <Card style={{textAlign:"center",padding:"20px"}}>
-                <div style={{fontSize:12,color:"#555"}}>Adicione matérias ao concurso primeiro</div>
-              </Card>
+              <Card style={{textAlign:"center",padding:"20px"}}><div style={{fontSize:12,color:"#555"}}>Adicione matérias ao concurso primeiro</div></Card>
             ):<>
               {weakSubs.length>0&&<div style={{background:"linear-gradient(135deg,#1e0808,#2a0a0a)",border:"1px solid #ef444466",borderRadius:11,padding:"11px 13px",marginBottom:10,animation:"rpulse 2.5s infinite"}}><Lbl color="#ef4444" mb={6}>⚠️ ABAIXO DE 80% — FOQUE AQUI</Lbl>{weakSubs.map(s=>{const d=getQStats(s.id,ac);return<div key={s.id} style={{display:"flex",justifyContent:"space-between",marginBottom:3}}><span style={{fontSize:12}}>{s.icon} <span style={{color:"#ef9999"}}>{s.name}</span></span><span style={{fontFamily:"Cinzel,serif",color:"#ef4444",fontWeight:700}}>{pct(d.correct,d.total)}%</span></div>;})}</div>}
               <Card style={{marginBottom:10}}>
@@ -1020,15 +1316,59 @@ export default function App(){
                 <select className="inp" value={qSub} onChange={e=>setQSub(e.target.value)} style={{marginBottom:8}}>
                   {(ac?.subjects||[]).map(s=><option key={s.id} value={s.id}>{s.icon} {s.name}</option>)}
                 </select>
-                <button className="sbtn" onClick={submitQ} style={{background:"linear-gradient(135deg,#1a1535,#221c42)",border:"1px solid #a78bfa55",color:"#a78bfa",fontSize:11,letterSpacing:1}}>✓ REGISTRAR (+0.5 XP/ACERTO)</button>
+                <button className="sbtn" onClick={submitQ} style={{background:"linear-gradient(135deg,#1a1535,#221c42)",border:"1px solid #a78bfa55",color:"#a78bfa",fontSize:11}}>✓ REGISTRAR (+0.5 XP/ACERTO)</button>
               </Card>
               <div style={{display:"flex",gap:5,marginBottom:10}}>{[{id:"today",l:"Hoje"},{id:"7d",l:"7 dias"},{id:"30d",l:"30 dias"},{id:"all",l:"Sempre"}].map(p=><button key={p.id} className="tbtn" onClick={()=>setQPeriod(p.id)} style={{flex:1,padding:"7px 0",borderRadius:8,border:`1px solid ${qPeriod===p.id?"#a78bfa55":"#1a1838"}`,background:qPeriod===p.id?"#1a1535":"#0f0f1e",color:qPeriod===p.id?"#a78bfa":"#555",fontFamily:"Cinzel,serif",fontSize:9}}>{p.l}</button>)}</div>
-              <Lbl>DESEMPENHO — {qPeriod==="today"?"HOJE":qPeriod==="7d"?"7 DIAS":qPeriod==="30d"?"30 DIAS":"TOTAL"}</Lbl>
+              <Lbl>DESEMPENHO</Lbl>
               {(ac?.subjects||[]).map(sub=>{const d=getQStats(sub.id,ac);const acc=d.total>0?pct(d.correct,d.total):null;const weak=acc!==null&&acc<80;return<div key={sub.id} style={{background:weak?"linear-gradient(135deg,#1e080855,#2a0a0a55)":"#0f0f1e",border:`1px solid ${weak?"#ef444455":"#1a1838"}`,borderRadius:10,padding:"9px 12px",marginBottom:5}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:acc!==null?4:0}}><span style={{fontSize:12}}>{sub.icon} <span style={{color:"#aaa"}}>{sub.name}</span></span><div style={{display:"flex",alignItems:"center",gap:7}}>{acc!==null&&<span style={{fontSize:10,color:"#555"}}>{d.correct}/{d.total}</span>}<span style={{fontFamily:"Cinzel,serif",fontSize:14,fontWeight:700,color:acc===null?"#333":acc>=80?sub.color:"#ef4444"}}>{acc===null?"—":`${acc}%`}</span>{weak&&<span>⚠️</span>}</div></div>{acc!==null&&<><div style={{height:4,background:"#1a1838",borderRadius:2,overflow:"hidden"}}><div style={{height:"100%",width:`${acc}%`,background:acc>=80?sub.color:"#ef4444",borderRadius:2,transition:"width 0.4s"}}/></div><div style={{display:"flex",justifyContent:"space-between",marginTop:2}}><span style={{fontSize:8,color:"#444"}}>Meta: 80%</span>{weak?<span style={{fontSize:8,color:"#ef4444"}}>Faltam {80-acc}%</span>:<span style={{fontSize:8,color:"#34d39977"}}>✓ Na meta</span>}</div></>}</div>;})}
             </>}
           </>}
 
-          {/* LIVROS TAB — multiple simultaneous */}
+          {/* SIMULADO */}
+          {studyTab==="simulado"&&<>
+            <button className="sbtn" onClick={()=>setAddingSimulado(v=>!v)} style={{background:"#0f0f1e",border:"1px solid #f9731644",color:"#f97316",fontSize:10,letterSpacing:2,marginBottom:10}}>{addingSimulado?"✕ CANCELAR":"+ REGISTRAR SIMULADO"}</button>
+            {addingSimulado&&<Card style={{marginBottom:10}}>
+              <Lbl>NOVO SIMULADO</Lbl>
+              <input className="inp" value={simName} onChange={e=>setSimName(e.target.value)} placeholder="Nome (ex: Simulado CESPE #1)" style={{marginBottom:6}}/>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,marginBottom:6}}>
+                <input className="inp" value={simScore} onChange={e=>setSimScore(e.target.value)} type="number" placeholder="Acertos"/>
+                <input className="inp" value={simTotal} onChange={e=>setSimTotal(e.target.value)} type="number" placeholder="Total questões"/>
+              </div>
+              <input className="inp" value={simTime} onChange={e=>setSimTime(e.target.value)} placeholder="Tempo (ex: 3h20min)" style={{marginBottom:9}}/>
+              {simScore&&simTotal&&<div style={{marginBottom:9,padding:"8px 12px",background:"#f9731611",border:"1px solid #f9731433",borderRadius:8,display:"flex",justifyContent:"space-between"}}>
+                <span style={{fontSize:11,color:"#aaa"}}>Desempenho</span>
+                <span style={{fontFamily:"Cinzel,serif",fontSize:14,fontWeight:700,color:pct(parseInt(simScore),parseInt(simTotal))>=70?"#22c55e":"#ef4444"}}>{pct(parseInt(simScore)||0,parseInt(simTotal)||1)}%</span>
+              </div>}
+              <button className="sbtn" onClick={addSimulado} style={{background:"linear-gradient(135deg,#1e0a00,#2a1400)",border:"1px solid #f9731455",color:"#f97316",fontSize:11}}>✓ SALVAR SIMULADO</button>
+            </Card>}
+
+            {(char.simulados||[]).length===0&&!addingSimulado&&<div style={{textAlign:"center",padding:"30px 0",color:"#444"}}><div style={{fontSize:36,marginBottom:8}}>📋</div><div>Nenhum simulado registrado</div></div>}
+
+            {(char.simulados||[]).length>1&&(()=>{
+              const sims=[...(char.simulados||[])].reverse().slice(-8);
+              const mx=Math.max(...sims.map(s=>s.score),1);
+              return<Card style={{marginBottom:10}}>
+                <Lbl mb={8}>EVOLUÇÃO DOS SIMULADOS</Lbl>
+                <div style={{display:"flex",alignItems:"flex-end",gap:3,height:60}}>
+                  {sims.map((s,i)=>{const a=pct(s.score,s.total);const color=a>=70?"#22c55e":a>=50?"#f59e0b":"#ef4444";return<div key={s.id} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2}}>
+                    <div style={{fontSize:7,color:color,fontFamily:"Cinzel,serif"}}>{a}%</div>
+                    <div style={{width:"100%",height:Math.max(4,(s.score/mx)*44),background:color,borderRadius:"3px 3px 0 0",transition:"height 0.3s"}}/>
+                    <div style={{fontSize:6,color:"#444",fontFamily:"Cinzel,serif"}}>{s.date?.slice(5)}</div>
+                  </div>;})}</div>
+              </Card>;
+            })()}
+
+            {(char.simulados||[]).map(s=>{const a=pct(s.score,s.total);return<div key={s.id} style={{background:"#0f0f1e",border:`1px solid ${a>=70?"#22c55e44":a>=50?"#f59e0b44":"#ef444433"}`,borderRadius:11,padding:"11px 13px",marginBottom:6}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:6}}>
+                <div><div style={{fontSize:13,color:"#e8dfc0"}}>{s.name}</div><div style={{fontSize:10,color:"#555"}}>{s.date}{s.concurso?` · ${(char.concursos||[]).find(c=>c.id===s.concurso)?.name||""}`:""}{s.time?` · ${s.time}`:""}</div></div>
+                <div style={{fontFamily:"Cinzel,serif",fontSize:18,color:a>=70?"#22c55e":a>=50?"#f59e0b":"#ef4444",fontWeight:700}}>{a}%</div>
+              </div>
+              <div style={{height:5,background:"#1a1838",borderRadius:3,overflow:"hidden"}}><div style={{height:"100%",width:`${a}%`,background:a>=70?"#22c55e":a>=50?"#f59e0b":"#ef4444",borderRadius:3}}/></div>
+              <div style={{display:"flex",justifyContent:"space-between",marginTop:3}}><span style={{fontSize:9,color:"#555"}}>{s.score}/{s.total} questões</span><span style={{fontSize:9,color:"#555"}}>+{Math.round(s.score*0.5)} XP</span></div>
+            </div>;})}
+          </>}
+
+          {/* LIVROS */}
           {studyTab==="livros"&&<>
             <button className="sbtn" onClick={()=>setAddingBook(v=>!v)} style={{background:"#0f0f1e",border:"1px solid #60a5fa44",color:"#60a5fa",fontSize:10,letterSpacing:2,marginBottom:10}}>{addingBook?"✕ CANCELAR":"+ ADICIONAR LIVRO"}</button>
             {addingBook&&<Card style={{marginBottom:10}}>
@@ -1038,27 +1378,17 @@ export default function App(){
               <input className="inp" value={bookPages} onChange={e=>setBookPages(e.target.value)} type="number" placeholder="Total de páginas" style={{marginBottom:9}}/>
               <button className="sbtn" onClick={addBook} style={{background:"linear-gradient(135deg,#1a1535,#221c42)",border:"1px solid #60a5fa55",color:"#60a5fa",fontSize:11}}>✓ ADICIONAR</button>
             </Card>}
-
             {readingBooks.length>0&&<>
-              <Lbl>LENDO AGORA — {readingBooks.length} LIVRO{readingBooks.length>1?"S":""}</Lbl>
+              <Lbl>LENDO AGORA — {readingBooks.length}</Lbl>
               {readingBooks.map((b)=>{
-                const p2=pct(b.page,b.total);
-                const isUpdating=updatingBookId===b.id;
+                const p2=pct(b.page,b.total);const isUpdating=updatingBookId===b.id;
                 return<Card key={b.id} glow="#60a5fa33" style={{marginBottom:10}}>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:4}}>
-                    <div style={{flex:1,minWidth:0}}>
-                      <div style={{fontSize:14,color:"#e8dfc0",marginBottom:2}}>{b.title}</div>
-                      {b.author&&<div style={{fontSize:11,color:"#60a5fa88",marginBottom:6}}>por {b.author}</div>}
-                    </div>
+                    <div style={{flex:1,minWidth:0}}><div style={{fontSize:14,color:"#e8dfc0",marginBottom:2}}>{b.title}</div>{b.author&&<div style={{fontSize:11,color:"#60a5fa88",marginBottom:6}}>por {b.author}</div>}</div>
                     <button className="tbtn" onClick={()=>removeBook(b.id)} style={{color:"#333",fontSize:13,marginLeft:8,flexShrink:0}}>✕</button>
                   </div>
-                  <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
-                    <span style={{fontSize:12,color:"#777"}}>Pág. {b.page} / {b.total}</span>
-                    <span style={{fontFamily:"Cinzel,serif",fontSize:14,color:"#60a5fa",fontWeight:700}}>{p2}%</span>
-                  </div>
-                  <div style={{height:8,background:"#1a1838",borderRadius:4,overflow:"hidden",marginBottom:9}}>
-                    <div style={{height:"100%",width:`${p2}%`,background:"linear-gradient(90deg,#60a5fa77,#60a5fa)",borderRadius:4,transition:"width 0.5s",boxShadow:"0 0 8px #60a5fa55"}}/>
-                  </div>
+                  <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}><span style={{fontSize:12,color:"#777"}}>Pág. {b.page} / {b.total}</span><span style={{fontFamily:"Cinzel,serif",fontSize:14,color:"#60a5fa",fontWeight:700}}>{p2}%</span></div>
+                  <div style={{height:8,background:"#1a1838",borderRadius:4,overflow:"hidden",marginBottom:9}}><div style={{height:"100%",width:`${p2}%`,background:"linear-gradient(90deg,#60a5fa77,#60a5fa)",borderRadius:4,transition:"width 0.5s",boxShadow:"0 0 8px #60a5fa55"}}/></div>
                   {isUpdating?(
                     <div style={{display:"flex",gap:6,marginBottom:6}}>
                       <input className="inp" value={bookPageInput} onChange={e=>setBookPageInput(e.target.value)} type="number" placeholder={`Pág. atual (${b.page})`} style={{flex:1}}/>
@@ -1067,28 +1397,27 @@ export default function App(){
                     </div>
                   ):(
                     <div style={{display:"flex",gap:6}}>
-                      <button className="tbtn" onClick={()=>{setUpdatingBookId(b.id);setBookPageInput("");}} style={{flex:1,padding:"8px 0",borderRadius:8,border:"1px solid #60a5fa44",color:"#60a5fa",fontFamily:"Cinzel,serif",fontSize:9,letterSpacing:1}}>✎ ATUALIZAR PÁGINA</button>
+                      <button className="tbtn" onClick={()=>{setUpdatingBookId(b.id);setBookPageInput("");}} style={{flex:1,padding:"8px 0",borderRadius:8,border:"1px solid #60a5fa44",color:"#60a5fa",fontFamily:"Cinzel,serif",fontSize:9}}>✎ ATUALIZAR PÁGINA</button>
                       {p2>=100&&<button className="tbtn" onClick={()=>finishBook(b.id)} style={{flex:1,padding:"8px 0",borderRadius:8,background:"linear-gradient(135deg,#f0c040,#d4a017)",color:"#000",fontFamily:"Cinzel,serif",fontSize:9,fontWeight:700,animation:"pulse 2s infinite"}}>🎉 FINALIZAR +80 XP</button>}
                     </div>
                   )}
                 </Card>;
               })}
             </>}
-
             {(char.books?.library||[]).length>0&&<>
-              <Lbl>BIBLIOTECA — {char.books.library.length} LIVROS</Lbl>
+              <Lbl>BIBLIOTECA — {char.books.library.length}</Lbl>
               {char.books.library.map((b,i)=>(
                 <div key={b.id||i} style={{background:"linear-gradient(135deg,#1a1400,#1e1600)",border:"1px solid #f0c04033",borderRadius:10,padding:"10px 13px",marginBottom:5,display:"flex",alignItems:"center",gap:10}}>
                   <span style={{fontSize:22}}>📗</span>
                   <div style={{flex:1}}><div style={{fontSize:13,color:"#e8dfc0"}}>{b.title}</div><div style={{fontSize:10,color:"#f0c04077"}}>{b.author}{b.finishedDate?` · ${b.finishedDate}`:""}</div></div>
-                  <span style={{fontFamily:"Cinzel,serif",fontSize:10,color:"#f0c040"}}>+80</span>
+                  <span style={{fontFamily:"Cinzel,serif",fontSize:10,color:"#f0c040"}}>+80 XP</span>
                 </div>
               ))}
             </>}
           </>}
         </div>}
 
-        {/* BODY */}
+        {/* ── BODY ── */}
         {tab==="body"&&<div style={{padding:"12px 12px 0"}}>
           <STabs tabs={[{id:"treino",i:"💪",l:"Treino",c:"#ef4444"},{id:"corrida",i:"🏃",l:"Corrida",c:"#34d399"},{id:"medidas",i:"📏",l:"Medidas",c:"#60a5fa"}]} val={bodyTab} onChange={setBodyTab}/>
 
@@ -1100,22 +1429,15 @@ export default function App(){
               </div>
               {Object.entries(plans).map(([key,plan])=>(
                 <div key={key} style={{background:`linear-gradient(135deg,${plan.color}14,${plan.color}06)`,border:`1px solid ${plan.color}44`,borderRadius:12,padding:"12px 13px",marginBottom:8}}>
-                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
-                    <span style={{fontSize:24}}>{plan.icon}</span>
-                    <div style={{flex:1}}>
-                      <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:plan.color,letterSpacing:1}}>{plan.label}</div>
-                      <div style={{fontSize:11,color:"#888"}}>{plan.focus}</div>
-                      <div style={{fontSize:10,color:"#555"}}>{plan.exercises.length} exercícios</div>
-                    </div>
-                  </div>
+                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}><span style={{fontSize:24}}>{plan.icon}</span><div style={{flex:1}}><div style={{fontFamily:"Cinzel,serif",fontSize:11,color:plan.color,letterSpacing:1}}>{plan.label}</div><div style={{fontSize:11,color:"#888"}}>{plan.focus}</div><div style={{fontSize:10,color:"#555"}}>{plan.exercises.length} exercícios</div></div></div>
                   <div style={{display:"flex",gap:6}}>
-                    <button className="tbtn" onClick={()=>startWorkout(key)} style={{flex:2,padding:"9px 0",borderRadius:8,background:plan.color,color:"#000",fontFamily:"Cinzel,serif",fontSize:10,fontWeight:700,letterSpacing:1}}>▶ INICIAR</button>
+                    <button className="tbtn" onClick={()=>startWorkout(key)} style={{flex:2,padding:"9px 0",borderRadius:8,background:plan.color,color:"#000",fontFamily:"Cinzel,serif",fontSize:10,fontWeight:700}}>▶ INICIAR</button>
                     <button className="tbtn" onClick={()=>openEditPlan(key)} style={{flex:1,padding:"9px 0",borderRadius:8,background:"#0f0f1e",border:`1px solid ${plan.color}44`,color:plan.color,fontFamily:"Cinzel,serif",fontSize:9}}>✎ EDITAR</button>
                     {!plan.isDefault&&<button className="tbtn" onClick={()=>deletePlan(key)} style={{padding:"9px 10px",borderRadius:8,background:"#1e0808",border:"1px solid #ef444433",color:"#ef4444",fontSize:12}}>🗑</button>}
                   </div>
                 </div>
               ))}
-              {(char.workoutLog||[]).length>0&&<><div style={{fontFamily:"Cinzel,serif",fontSize:9,letterSpacing:3,color:"#555",margin:"10px 0 8px"}}>HISTÓRICO</div>{(char.workoutLog||[]).slice(0,4).map((w,i)=><div key={i} style={{background:"#0f0f1e",border:"1px solid #1a1838",borderRadius:9,padding:"8px 12px",marginBottom:4,display:"flex",justifyContent:"space-between",alignItems:"center"}}><div><span style={{fontSize:12,color:"#aaa"}}>{w.label}</span><div style={{fontSize:10,color:"#555"}}>{w.date} · {w.done}/{w.total}</div></div><span style={{fontFamily:"Cinzel,serif",fontSize:12,color:"#f0c040"}}>+{w.xp} XP</span></div>)}</>}
+              {(char.workoutLog||[]).length>0&&<><Lbl style={{marginTop:10}}>HISTÓRICO</Lbl>{(char.workoutLog||[]).slice(0,4).map((w,i)=><div key={i} style={{background:"#0f0f1e",border:"1px solid #1a1838",borderRadius:9,padding:"8px 12px",marginBottom:4,display:"flex",justifyContent:"space-between",alignItems:"center"}}><div><span style={{fontSize:12,color:"#aaa"}}>{w.label}</span><div style={{fontSize:10,color:"#555"}}>{w.date} · {w.done}/{w.total}</div></div><span style={{fontFamily:"Cinzel,serif",fontSize:12,color:"#f0c040"}}>+{w.xp} XP</span></div>)}</>}
             </>}
 
             {workoutView==="active"&&activeWorkout&&(()=>{const plan=plans[activeWorkout];const done2=plan.exercises.filter(e=>doneEx[e.id]).length;return<div>
@@ -1126,26 +1448,22 @@ export default function App(){
                 <div style={{fontSize:10,color:"#555"}}>{done2}/{plan.exercises.length} exercícios</div>
               </div>
               {plan.exercises.map(ex=>{const done3=!!doneEx[ex.id];return<button key={ex.id} className="btn" onClick={()=>setDoneEx(d=>({...d,[ex.id]:!d[ex.id]}))} style={{marginBottom:6}}><div style={{background:done3?`linear-gradient(135deg,${plan.color}18,${plan.color}08)`:"#0f0f1e",border:`1px solid ${done3?plan.color+"66":"#1a1838"}`,borderRadius:10,padding:"11px 12px"}}><div style={{display:"flex",alignItems:"center",gap:10,marginBottom:3}}><div style={{width:22,height:22,borderRadius:6,border:`2px solid ${done3?plan.color:"#2a2848"}`,background:done3?plan.color+"33":"transparent",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{done3&&<span style={{color:plan.color,fontSize:12,fontWeight:900}}>✓</span>}</div><div style={{flex:1}}><div style={{fontSize:13,color:done3?"#e8dfc0":"#aaa"}}>{ex.name}</div><div style={{fontSize:11,color:plan.color}}>{ex.sets}x {ex.reps} · {ex.rest}</div></div></div><div style={{fontSize:10,color:"#555",paddingLeft:32}}>💡 {ex.tip}</div></div></button>;})}
-              <div style={{display:"flex",gap:6,marginTop:4,marginBottom:10}}><button className="tbtn" onClick={()=>{setActiveWorkout(null);setWorkoutView("list");}} style={{flex:1,padding:"10px",borderRadius:9,border:"1px solid #2a2848",color:"#666",fontFamily:"Cinzel,serif",fontSize:10}}>CANCELAR</button><button className="tbtn" onClick={finishWorkout} style={{flex:2,padding:"10px",borderRadius:9,background:`linear-gradient(135deg,${plan.color}22,${plan.color}11)`,border:`1px solid ${plan.color}55`,color:plan.color,fontFamily:"Cinzel,serif",fontSize:11,letterSpacing:1}}>✓ CONCLUIR</button></div>
+              <div style={{display:"flex",gap:6,marginTop:4,marginBottom:10}}><button className="tbtn" onClick={()=>{setActiveWorkout(null);setWorkoutView("list");}} style={{flex:1,padding:"10px",borderRadius:9,border:"1px solid #2a2848",color:"#666",fontFamily:"Cinzel,serif",fontSize:10}}>CANCELAR</button><button className="tbtn" onClick={finishWorkout} style={{flex:2,padding:"10px",borderRadius:9,background:`linear-gradient(135deg,${plan.color}22,${plan.color}11)`,border:`1px solid ${plan.color}55`,color:plan.color,fontFamily:"Cinzel,serif",fontSize:11}}>✓ CONCLUIR</button></div>
             </div>;})()} 
 
             {workoutView==="edit"&&editPlan&&<div>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
-                <div>
-                  <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:editPlan.color,letterSpacing:1}}>EDITANDO: {editPlan.label}</div>
-                  <div style={{fontSize:11,color:"#666"}}>{editPlan.exercises.length} exercícios</div>
-                </div>
+                <div><div style={{fontFamily:"Cinzel,serif",fontSize:11,color:editPlan.color}}>EDITANDO: {editPlan.label}</div><div style={{fontSize:11,color:"#666"}}>{editPlan.exercises.length} exercícios</div></div>
                 <div style={{display:"flex",gap:6}}>
                   <button className="tbtn" onClick={()=>{setWorkoutView("list");setEditingPlanKey(null);setEditPlan(null);}} style={{color:"#555",fontFamily:"Cinzel,serif",fontSize:9,border:"1px solid #2a2848",borderRadius:7,padding:"6px 10px"}}>CANCELAR</button>
                   <button className="tbtn" onClick={saveEditPlan} style={{color:editPlan.color,fontFamily:"Cinzel,serif",fontSize:9,border:`1px solid ${editPlan.color}55`,borderRadius:7,padding:"6px 10px",background:`${editPlan.color}22`}}>✓ SALVAR</button>
                 </div>
               </div>
               <Card style={{marginBottom:10}}>
-                <Lbl>INFORMAÇÕES DA FICHA</Lbl>
                 <input className="inp" value={editPlan.label} onChange={e=>setEditPlan(p=>({...p,label:e.target.value}))} placeholder="Nome da ficha" style={{marginBottom:6}}/>
-                <input className="inp" value={editPlan.focus} onChange={e=>setEditPlan(p=>({...p,focus:e.target.value}))} placeholder="Foco (ex: Peito · Tríceps)"/>
+                <input className="inp" value={editPlan.focus} onChange={e=>setEditPlan(p=>({...p,focus:e.target.value}))} placeholder="Foco"/>
               </Card>
-              <Lbl>EXERCÍCIOS ATUAIS</Lbl>
+              <Lbl>EXERCÍCIOS</Lbl>
               {editPlan.exercises.map((ex,idx)=>(
                 <Card key={ex.id} style={{marginBottom:7}}>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
@@ -1157,69 +1475,136 @@ export default function App(){
                     <div><div style={{fontSize:8,color:"#555",marginBottom:2}}>REPS</div><input className="inp" value={ex.reps} onChange={e=>updateExField(idx,"reps",e.target.value)} style={{padding:"6px 8px",fontSize:12}}/></div>
                     <div><div style={{fontSize:8,color:"#555",marginBottom:2}}>DESCANSO</div><input className="inp" value={ex.rest} onChange={e=>updateExField(idx,"rest",e.target.value)} style={{padding:"6px 8px",fontSize:12}}/></div>
                   </div>
-                  <input className="inp" value={ex.tip} onChange={e=>updateExField(idx,"tip",e.target.value)} placeholder="Dica (opcional)" style={{fontSize:11,padding:"6px 9px"}}/>
+                  <input className="inp" value={ex.tip} onChange={e=>updateExField(idx,"tip",e.target.value)} placeholder="Dica" style={{fontSize:11,padding:"6px 9px"}}/>
                 </Card>
               ))}
-              <Card style={{marginTop:4,marginBottom:10}} glow="#34d39933">
+              <Card glow="#34d39933" style={{marginBottom:10}}>
                 <Lbl color="#34d399">+ ADICIONAR EXERCÍCIO</Lbl>
-                <input className="inp" value={newExName} onChange={e=>setNewExName(e.target.value)} placeholder="Nome do exercício" style={{marginBottom:6}}/>
+                <input className="inp" value={newExName} onChange={e=>setNewExName(e.target.value)} placeholder="Nome" style={{marginBottom:6}}/>
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:5,marginBottom:6}}>
                   <div><div style={{fontSize:8,color:"#555",marginBottom:2}}>SÉRIES</div><input className="inp" value={newExSets} onChange={e=>setNewExSets(e.target.value)} style={{padding:"6px 8px",fontSize:12}}/></div>
                   <div><div style={{fontSize:8,color:"#555",marginBottom:2}}>REPS</div><input className="inp" value={newExReps} onChange={e=>setNewExReps(e.target.value)} style={{padding:"6px 8px",fontSize:12}}/></div>
                   <div><div style={{fontSize:8,color:"#555",marginBottom:2}}>DESCANSO</div><input className="inp" value={newExRest} onChange={e=>setNewExRest(e.target.value)} style={{padding:"6px 8px",fontSize:12}}/></div>
                 </div>
-                <input className="inp" value={newExTip} onChange={e=>setNewExTip(e.target.value)} placeholder="Dica (opcional)" style={{marginBottom:9,fontSize:11}}/>
-                <button className="sbtn" onClick={addExerciseToEdit} style={{background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #34d39955",color:"#34d399",fontSize:11,letterSpacing:1}}>+ ADICIONAR EXERCÍCIO</button>
+                <input className="inp" value={newExTip} onChange={e=>setNewExTip(e.target.value)} placeholder="Dica" style={{marginBottom:9,fontSize:11}}/>
+                <button className="sbtn" onClick={addExerciseToEdit} style={{background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #34d39955",color:"#34d399",fontSize:11}}>+ ADICIONAR</button>
               </Card>
             </div>}
 
             {workoutView==="new"&&<div>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
-                <Lbl mb={0}>NOVA FICHA DE TREINO</Lbl>
+                <Lbl mb={0}>NOVA FICHA</Lbl>
                 <button className="tbtn" onClick={()=>setWorkoutView("list")} style={{color:"#555",fontSize:16}}>✕</button>
               </div>
               <Card style={{marginBottom:10}}>
-                <input className="inp" value={newPlanName} onChange={e=>setNewPlanName(e.target.value)} placeholder="Nome da ficha (ex: Treino de Perna)" style={{marginBottom:7}}/>
-                <input className="inp" value={newPlanFocus} onChange={e=>setNewPlanFocus(e.target.value)} placeholder="Foco (ex: Quadríceps · Glúteo)" style={{marginBottom:10}}/>
+                <input className="inp" value={newPlanName} onChange={e=>setNewPlanName(e.target.value)} placeholder="Nome da ficha" style={{marginBottom:7}}/>
+                <input className="inp" value={newPlanFocus} onChange={e=>setNewPlanFocus(e.target.value)} placeholder="Foco" style={{marginBottom:10}}/>
                 <Lbl>ÍCONE</Lbl>
-                <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:10}}>
-                  {PLAN_ICONS.map(ic=><button key={ic} className="tbtn" onClick={()=>setNewPlanIcon(ic)} style={{fontSize:22,opacity:newPlanIcon===ic?1:0.3}}>{ic}</button>)}
-                </div>
+                <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:10}}>{PLAN_ICONS.map(ic=><button key={ic} className="tbtn" onClick={()=>setNewPlanIcon(ic)} style={{fontSize:22,opacity:newPlanIcon===ic?1:0.3}}>{ic}</button>)}</div>
                 <Lbl>COR</Lbl>
-                <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:12}}>
-                  {PLAN_COLORS.map(c=><button key={c} className="tbtn" onClick={()=>setNewPlanColor(c)} style={{width:28,height:28,borderRadius:8,background:c,border:`3px solid ${newPlanColor===c?"#fff":"transparent"}`}}/>)}
-                </div>
-                <button className="sbtn" onClick={createNewPlan} style={{background:`linear-gradient(135deg,${newPlanColor}33,${newPlanColor}11)`,border:`1px solid ${newPlanColor}66`,color:newPlanColor,fontSize:12,letterSpacing:1,fontWeight:700}}>✓ CRIAR FICHA</button>
+                <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:12}}>{PLAN_COLORS.map(c=><button key={c} className="tbtn" onClick={()=>setNewPlanColor(c)} style={{width:28,height:28,borderRadius:8,background:c,border:`3px solid ${newPlanColor===c?"#fff":"transparent"}`}}/>)}</div>
+                <button className="sbtn" onClick={createNewPlan} style={{background:`linear-gradient(135deg,${newPlanColor}33,${newPlanColor}11)`,border:`1px solid ${newPlanColor}66`,color:newPlanColor,fontSize:12,fontWeight:700}}>✓ CRIAR FICHA</button>
               </Card>
-              <div style={{background:"#0f0f1e",border:"1px solid #1a1838",borderRadius:9,padding:"9px 12px"}}>
-                <div style={{fontSize:11,color:"#555"}}>💡 Depois de criar, clique em ✎ EDITAR para adicionar os exercícios da sua nova ficha.</div>
-              </div>
             </div>}
           </>}
 
           {bodyTab==="corrida"&&<>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:10}}>{[{l:"Total",v:fmtKm(char.stats.totalKm),i:"📍",c:"#34d399"},{l:"Corridas",v:`${char.stats.totalRuns||0}x`,i:"🏃",c:"#60a5fa"},{l:"Recorde",v:fmtKm(char.stats.prKm),i:"🏅",c:"#f0c040"}].map((s,i)=><Card key={i} style={{padding:"10px",textAlign:"center"}}><div style={{fontSize:17,marginBottom:3}}>{s.i}</div><div style={{fontFamily:"Cinzel,serif",fontSize:13,color:s.c,fontWeight:700}}>{s.v}</div><div style={{fontSize:8,color:"#444",letterSpacing:1,marginTop:1}}>{s.l.toUpperCase()}</div></Card>)}</div>
-            <Card glow="#34d39933" style={{marginBottom:10}}><Lbl>REGISTRAR CORRIDA</Lbl><div style={{display:"flex",gap:5,marginBottom:6}}><input className="inp" value={runKm} onChange={e=>setRunKm(e.target.value)} type="number" step="0.1" placeholder="Distância (km)" style={{flex:1}}/><input className="inp" value={runMin} onChange={e=>setRunMin(e.target.value)} type="number" placeholder="Tempo (min)" style={{flex:1}}/></div><div style={{display:"flex",gap:4,marginBottom:8}}>{[2,5,8,10].map(k=><button key={k} className="tbtn" onClick={()=>setRunKm(String(k))} style={{flex:1,padding:"7px 0",borderRadius:7,border:`1px solid ${parseFloat(runKm)===k?"#34d39966":"#2a2848"}`,background:parseFloat(runKm)===k?"#34d39922":"transparent",color:parseFloat(runKm)===k?"#34d399":"#555",fontFamily:"Cinzel,serif",fontSize:9}}>{k}km</button>)}</div>{runKm&&<div style={{marginBottom:8,padding:"6px 10px",background:"#141228",borderRadius:7,border:"1px solid #2a2848",display:"flex",justifyContent:"space-between",fontSize:11,color:"#888"}}><span>XP estimado</span><span style={{color:"#34d399",fontFamily:"Cinzel,serif",fontWeight:700}}>+{RUN_XP(parseFloat(runKm)||0)}{parseFloat(runKm)>(char.stats.prKm||0)?" + 20 PR!":""}</span></div>}<button className="sbtn" onClick={logRun} style={{background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #34d39955",color:"#34d399",fontSize:11,letterSpacing:1}}>🏃 REGISTRAR</button></Card>
-            {(char.runs||[]).length>0&&(()=>{const now=new Date();const days=[];for(let i=29;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);days.push(d.toISOString().slice(0,10));}const byDay={};(char.runs||[]).forEach(r=>{if(r.date)byDay[r.date]=(byDay[r.date]||0)+r.km;});return<><Lbl>ÚLTIMOS 30 DIAS</Lbl><div style={{display:"grid",gridTemplateColumns:"repeat(10,1fr)",gap:4,marginBottom:10}}>{days.map(d=>{const km2=byDay[d]||0;return<div key={d} title={`${d}: ${km2}km`} style={{height:18,borderRadius:3,background:km2>=10?"#34d399":km2>=5?"#22a374":km2>0?"#115c3f":"#1a1838"}}/>;})}</div></>;})()} 
-            {(char.runs||[]).length>0&&<><Lbl>HISTÓRICO COMPLETO</Lbl>{(char.runs||[]).slice(0,10).map((r,i)=><div key={i} style={{background:"#0f0f1e",border:`1px solid ${r.pr?"#f0c04044":"#1a1838"}`,borderRadius:9,padding:"8px 12px",marginBottom:4,display:"flex",justifyContent:"space-between",alignItems:"center"}}><div><span style={{fontSize:12}}>🏃 <span style={{color:"#888"}}>{r.date}</span></span>{r.pace&&<div style={{fontSize:9,color:"#555"}}>{Math.floor(r.pace/60)}'{r.pace%60}" /km</div>}</div><div style={{display:"flex",gap:7,alignItems:"center"}}>{r.pr&&<span style={{fontSize:8,fontFamily:"Cinzel,serif",color:"#f0c040",background:"#f0c04022",border:"1px solid #f0c04044",borderRadius:5,padding:"1px 5px"}}>PR</span>}<span style={{fontFamily:"Cinzel,serif",fontSize:13,color:"#34d399",fontWeight:700}}>{r.km}km</span><span style={{fontSize:10,color:"#555"}}>+{r.xp}</span></div></div>)}</>}
+            <Card glow="#34d39933" style={{marginBottom:10}}><Lbl>REGISTRAR CORRIDA</Lbl><div style={{display:"flex",gap:5,marginBottom:6}}><input className="inp" value={runKm} onChange={e=>setRunKm(e.target.value)} type="number" step="0.1" placeholder="Distância (km)" style={{flex:1}}/><input className="inp" value={runMin} onChange={e=>setRunMin(e.target.value)} type="number" placeholder="Tempo (min)" style={{flex:1}}/></div><div style={{display:"flex",gap:4,marginBottom:8}}>{[2,5,8,10].map(k=><button key={k} className="tbtn" onClick={()=>setRunKm(String(k))} style={{flex:1,padding:"7px 0",borderRadius:7,border:`1px solid ${parseFloat(runKm)===k?"#34d39966":"#2a2848"}`,background:parseFloat(runKm)===k?"#34d39922":"transparent",color:parseFloat(runKm)===k?"#34d399":"#555",fontFamily:"Cinzel,serif",fontSize:9}}>{k}km</button>)}</div>{runKm&&<div style={{marginBottom:8,padding:"6px 10px",background:"#141228",borderRadius:7,display:"flex",justifyContent:"space-between",fontSize:11,color:"#888"}}><span>XP estimado</span><span style={{color:"#34d399",fontFamily:"Cinzel,serif",fontWeight:700}}>+{RUN_XP(parseFloat(runKm)||0)}{parseFloat(runKm)>(char.stats.prKm||0)?" + 20 PR!":""}</span></div>}<button className="sbtn" onClick={logRun} style={{background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #34d39955",color:"#34d399",fontSize:11}}>🏃 REGISTRAR</button></Card>
+            {(char.runs||[]).length>0&&(()=>{const now=new Date();const days=[];for(let i=29;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);days.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`);}const byDay={};(char.runs||[]).forEach(r=>{if(r.date)byDay[r.date]=(byDay[r.date]||0)+r.km;});return<><Lbl>ÚLTIMOS 30 DIAS</Lbl><div style={{display:"grid",gridTemplateColumns:"repeat(10,1fr)",gap:4,marginBottom:10}}>{days.map(d=>{const km2=byDay[d]||0;return<div key={d} style={{height:18,borderRadius:3,background:km2>=10?"#34d399":km2>=5?"#22a374":km2>0?"#115c3f":"#1a1838"}}/>;})}</div></>;})()}
+            {(char.runs||[]).length>0&&<><Lbl>HISTÓRICO</Lbl>{(char.runs||[]).slice(0,10).map((r,i)=><div key={i} style={{background:"#0f0f1e",border:`1px solid ${r.pr?"#f0c04044":"#1a1838"}`,borderRadius:9,padding:"8px 12px",marginBottom:4,display:"flex",justifyContent:"space-between",alignItems:"center"}}><div><span style={{fontSize:12}}>🏃 <span style={{color:"#888"}}>{r.date}</span></span>{r.pace&&<div style={{fontSize:9,color:"#555"}}>{Math.floor(r.pace/60)}'{r.pace%60}" /km</div>}</div><div style={{display:"flex",gap:7,alignItems:"center"}}>{r.pr&&<span style={{fontSize:8,fontFamily:"Cinzel,serif",color:"#f0c040",background:"#f0c04022",border:"1px solid #f0c04044",borderRadius:5,padding:"1px 5px"}}>PR</span>}<span style={{fontFamily:"Cinzel,serif",fontSize:13,color:"#34d399",fontWeight:700}}>{r.km}km</span><span style={{fontSize:10,color:"#555"}}>+{r.xp}</span></div></div>)}</>}
           </>}
 
           {bodyTab==="medidas"&&<>
-            <Card style={{marginBottom:10}}><Lbl>ALTURA E PESO</Lbl><div style={{display:"flex",gap:5,marginBottom:8}}><input className="inp" value={weightIn} onChange={e=>setWeightIn(e.target.value)} type="number" step="0.1" placeholder={`Peso kg${char.body?.weight?` (${char.body.weight})`:""}`} style={{flex:1}}/><input className="inp" value={heightIn} onChange={e=>setHeightIn(e.target.value)} type="number" placeholder={`Altura cm${char.body?.height?` (${char.body.height})`:""}`} style={{flex:1}}/></div><button className="sbtn" onClick={saveBodyStats} style={{background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #34d39955",color:"#34d399",fontSize:11,letterSpacing:1}}>💾 SALVAR MEDIDAS</button></Card>
-            {bmi&&<Card glow={bmiC.c+"44"} style={{marginBottom:10,textAlign:"center",padding:"20px 14px"}}><Lbl mb={8}>ÍNDICE DE MASSA CORPORAL</Lbl><div style={{fontFamily:"Cinzel,serif",fontSize:48,fontWeight:900,color:bmiC.c,textShadow:`0 0 20px ${bmiC.c}66`}}>{bmi}</div><div style={{fontFamily:"Cinzel,serif",fontSize:14,color:bmiC.c,marginBottom:8}}>{bmiC.l}</div><div style={{height:8,background:"#1a1838",borderRadius:4,overflow:"hidden",marginBottom:12}}><div style={{height:"100%",width:`${Math.min(100,Math.max(0,((bmi-10)/30)*100))}%`,background:`linear-gradient(90deg,${bmiC.c}77,${bmiC.c})`,borderRadius:4}}/></div><div style={{fontSize:12,color:"#888"}}>{bmiC.t}</div><div style={{display:"flex",justifyContent:"space-around",marginTop:14}}>{[{l:"PESO",v:`${char.body.weight}kg`},{l:"ALTURA",v:`${char.body.height}cm`}].map((s,i)=><div key={i}><div style={{fontFamily:"Cinzel,serif",fontSize:16,color:"#e8dfc0"}}>{s.v}</div><div style={{fontSize:9,color:"#555"}}>{s.l}</div></div>)}</div></Card>}
+            <Card style={{marginBottom:10}}><Lbl>ALTURA E PESO</Lbl><div style={{display:"flex",gap:5,marginBottom:8}}><input className="inp" value={weightIn} onChange={e=>setWeightIn(e.target.value)} type="number" step="0.1" placeholder={`Peso kg${char.body?.weight?` (${char.body.weight})`:""}`} style={{flex:1}}/><input className="inp" value={heightIn} onChange={e=>setHeightIn(e.target.value)} type="number" placeholder={`Altura cm${char.body?.height?` (${char.body.height})`:""}`} style={{flex:1}}/></div><button className="sbtn" onClick={saveBodyStats} style={{background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #34d39955",color:"#34d399",fontSize:11}}>💾 SALVAR</button></Card>
+            {bmi&&<Card glow={bmiC.c+"44"} style={{marginBottom:10,textAlign:"center",padding:"20px 14px"}}><Lbl mb={8}>IMC</Lbl><div style={{fontFamily:"Cinzel,serif",fontSize:48,fontWeight:900,color:bmiC.c,textShadow:`0 0 20px ${bmiC.c}66`}}>{bmi}</div><div style={{fontFamily:"Cinzel,serif",fontSize:14,color:bmiC.c,marginBottom:8}}>{bmiC.l}</div><div style={{height:8,background:"#1a1838",borderRadius:4,overflow:"hidden",marginBottom:12}}><div style={{height:"100%",width:`${Math.min(100,Math.max(0,((bmi-10)/30)*100))}%`,background:`linear-gradient(90deg,${bmiC.c}77,${bmiC.c})`,borderRadius:4}}/></div><div style={{fontSize:12,color:"#888"}}>{bmiC.t}</div><div style={{display:"flex",justifyContent:"space-around",marginTop:14}}>{[{l:"PESO",v:`${char.body.weight}kg`},{l:"ALTURA",v:`${char.body.height}cm`}].map((s,i)=><div key={i}><div style={{fontFamily:"Cinzel,serif",fontSize:16,color:"#e8dfc0"}}>{s.v}</div><div style={{fontSize:9,color:"#555"}}>{s.l}</div></div>)}</div></Card>}
             <Card><Lbl>TABELA IMC</Lbl>{[["< 18.5","Abaixo do peso","#60a5fa"],[" 18.5 – 24.9","Peso ideal ✓","#22c55e"],["25 – 29.9","Sobrepeso","#f59e0b"],["30 – 34.9","Obesidade I","#f97316"],["≥ 35","Obesidade II+","#ef4444"]].map(([r,l,c],i)=><div key={i} style={{display:"flex",justifyContent:"space-between",marginBottom:5}}><span style={{fontSize:11,color:"#777"}}>{r}</span><span style={{fontSize:11,color:c,fontFamily:"Cinzel,serif"}}>{l}</span></div>)}</Card>
           </>}
         </div>}
 
-        {/* LIFE */}
+        {/* ── LIFE ── */}
         {tab==="life"&&<div style={{padding:"12px 12px 0"}}>
-          <STabs tabs={[{id:"financeiro",i:"💰",l:"Finanças",c:"#22c55e"},{id:"perfil",i:"👤",l:"Perfil",c:"#f0c040"}]} val={lifeTab} onChange={setLifeTab}/>
+          <STabs tabs={[{id:"financeiro",i:"💰",l:"Finanças",c:"#22c55e"},{id:"conquistas",i:"🏆",l:"Conquistas",c:"#f0c040"},{id:"stats",i:"📊",l:"Stats",c:"#60a5fa"},{id:"perfil",i:"👤",l:"Perfil",c:"#a78bfa"}]} val={lifeTab} onChange={setLifeTab}/>
 
           {lifeTab==="financeiro"&&<>
-            <Card glow="#22c55e33" style={{marginBottom:10}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}><div><Lbl mb={2}>SALÁRIO MENSAL</Lbl>{editingSalary?<div style={{display:"flex",gap:5,marginTop:5}}><input className="inp" value={salaryIn} onChange={e=>setSalaryIn(e.target.value)} type="number" placeholder="Valor" style={{width:130}}/><button className="tbtn" onClick={saveSalary} style={{background:"#22c55e22",border:"1px solid #22c55e55",color:"#22c55e",borderRadius:7,padding:"7px 11px",fontFamily:"Cinzel,serif",fontSize:9}}>OK</button><button className="tbtn" onClick={()=>setEditingSalary(false)} style={{color:"#555",background:"none",border:"1px solid #2a2848",borderRadius:7,padding:"7px 9px",fontSize:11}}>✕</button></div>:<button className="tbtn" onClick={()=>{setEditingSalary(true);setSalaryIn(String(salary));}} style={{background:"none",border:"none",padding:0,display:"flex",alignItems:"center",gap:6,cursor:"pointer"}}><span style={{fontFamily:"Cinzel,serif",fontSize:22,fontWeight:700,color:"#22c55e"}}>{curr(salary)}</span><span style={{fontSize:10,color:"#444"}}>✎</span></button>}</div><div style={{textAlign:"right"}}><div style={{fontFamily:"Cinzel,serif",fontSize:15,color:remaining>=0?"#22c55e":"#ef4444"}}>{curr(remaining)}</div><div style={{fontSize:9,color:"#555"}}>disponível</div></div></div><div style={{height:8,background:"#1a1838",borderRadius:4,overflow:"hidden",marginBottom:5}}><div style={{height:"100%",width:`${Math.min(100,(totalExp/salary)*100)}%`,background:`linear-gradient(90deg,${remaining>=0?"#22c55e":"#ef4444"}88,${remaining>=0?"#22c55e":"#ef4444"})`,borderRadius:4,transition:"width 0.5s"}}/></div><div style={{display:"flex",justifyContent:"space-between",fontSize:9,color:"#555"}}><span>Comprometido: {curr(totalExp)}</span><span>{Math.round((totalExp/salary)*100)}% do salário</span></div></Card>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}><Lbl mb={0}>GASTOS E CONTAS</Lbl><button className="tbtn" onClick={()=>setAddingExp(v=>!v)} style={{background:"#0a2010",border:"1px solid #22c55e44",color:"#22c55e",borderRadius:7,padding:"4px 10px",fontFamily:"Cinzel,serif",fontSize:8,letterSpacing:1}}>+ ADICIONAR</button></div>
-            {addingExp&&<Card style={{marginBottom:10}}><Lbl>NOVO GASTO</Lbl><div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:7}}>{["🍽️","📱","🌐","💳","🏠","🎮","💊","📚","✈️","🎵","⛽","💄"].map(ic=><button key={ic} className="tbtn" onClick={()=>setNewExpIcon(ic)} style={{fontSize:17,opacity:newExpIcon===ic?1:0.3}}>{ic}</button>)}</div><input className="inp" value={newExpName} onChange={e=>setNewExpName(e.target.value)} placeholder="Nome do gasto" style={{marginBottom:5}}/><input className="inp" value={newExpAmt} onChange={e=>setNewExpAmt(e.target.value)} type="number" placeholder="Valor mensal (R$)" style={{marginBottom:5}}/><div style={{display:"flex",gap:5,marginBottom:9}}><input className="inp" value={newExpInst} onChange={e=>setNewExpInst(e.target.value)} type="number" placeholder="Parcela atual (ex: 2)" style={{flex:1}}/><input className="inp" value={newExpTotal} onChange={e=>setNewExpTotal(e.target.value)} type="number" placeholder="Total parcelas (ex: 12)" style={{flex:1}}/></div><div style={{display:"flex",gap:5}}><button className="tbtn" onClick={()=>setAddingExp(false)} style={{flex:1,padding:"9px",borderRadius:8,border:"1px solid #2a2848",color:"#666",fontFamily:"Cinzel,serif",fontSize:9}}>CANCELAR</button><button className="tbtn" onClick={addExpense} style={{flex:2,padding:"9px",borderRadius:8,background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #22c55e55",color:"#22c55e",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1}}>✓ ADICIONAR</button></div></Card>}
-            {expenses.map(exp=><div key={exp.id} style={{background:exp.paid?"linear-gradient(135deg,#0a2010,#0d2a14)":"#0f0f1e",border:`1px solid ${exp.paid?"#22c55e44":"#1a1838"}`,borderRadius:11,padding:"11px 12px",marginBottom:6}}><div style={{display:"flex",alignItems:"center",gap:9}}><button className="tbtn" onClick={()=>togglePaid(exp.id)} style={{width:22,height:22,borderRadius:5,border:`2px solid ${exp.paid?"#22c55e":"#2a2848"}`,background:exp.paid?"#22c55e33":"transparent",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{exp.paid&&<span style={{color:"#22c55e",fontSize:11,fontWeight:900}}>✓</span>}</button><span style={{fontSize:18}}>{exp.icon}</span><div style={{flex:1}}><div style={{fontSize:13,color:exp.paid?"#aaa":"#e8dfc0",textDecoration:exp.paid?"line-through":"none"}}>{exp.name}</div><div style={{display:"flex",alignItems:"center",gap:8,marginTop:1}}>{exp.installments&&<div style={{fontSize:10,color:"#a78bfa"}}>📋 {exp.installments.current}/{exp.installments.total}x{exp.installments.current<exp.installments.total&&<button className="tbtn" onClick={()=>advanceInstallment(exp.id)} style={{marginLeft:4,fontSize:9,color:"#a78bfa",border:"1px solid #a78bfa44",borderRadius:4,padding:"1px 5px",fontFamily:"Cinzel,serif"}}>+1</button>}</div>}<span style={{fontSize:10,color:"#555"}}>+{FIN_XP(exp.amount)} XP ao pagar</span></div></div><div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:4}}><span style={{fontFamily:"Cinzel,serif",fontSize:13,color:exp.paid?"#22c55e":"#e8dfc0"}}>{curr(exp.amount)}</span><button className="tbtn" onClick={()=>removeExpense(exp.id)} style={{color:"#333",fontSize:11}}>✕</button></div></div></div>)}
+            <Card glow="#22c55e33" style={{marginBottom:10}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}><div><Lbl mb={2}>SALÁRIO MENSAL</Lbl>{editingSalary?<div style={{display:"flex",gap:5,marginTop:5}}><input className="inp" value={salaryIn} onChange={e=>setSalaryIn(e.target.value)} type="number" placeholder="Valor" style={{width:130}}/><button className="tbtn" onClick={saveSalary} style={{background:"#22c55e22",border:"1px solid #22c55e55",color:"#22c55e",borderRadius:7,padding:"7px 11px",fontFamily:"Cinzel,serif",fontSize:9}}>OK</button><button className="tbtn" onClick={()=>setEditingSalary(false)} style={{color:"#555",background:"none",border:"1px solid #2a2848",borderRadius:7,padding:"7px 9px",fontSize:11}}>✕</button></div>:<button className="tbtn" onClick={()=>{setEditingSalary(true);setSalaryIn(String(salary));}} style={{background:"none",border:"none",padding:0,display:"flex",alignItems:"center",gap:6}}><span style={{fontFamily:"Cinzel,serif",fontSize:22,fontWeight:700,color:"#22c55e"}}>{curr(salary)}</span><span style={{fontSize:10,color:"#444"}}>✎</span></button>}</div><div style={{textAlign:"right"}}><div style={{fontFamily:"Cinzel,serif",fontSize:15,color:remaining>=0?"#22c55e":"#ef4444"}}>{curr(remaining)}</div><div style={{fontSize:9,color:"#555"}}>disponível</div></div></div><div style={{height:8,background:"#1a1838",borderRadius:4,overflow:"hidden",marginBottom:5}}><div style={{height:"100%",width:`${Math.min(100,(totalExp/salary)*100)}%`,background:`linear-gradient(90deg,${remaining>=0?"#22c55e":"#ef4444"}88,${remaining>=0?"#22c55e":"#ef4444"})`,borderRadius:4,transition:"width 0.5s"}}/></div><div style={{display:"flex",justifyContent:"space-between",fontSize:9,color:"#555"}}><span>Comprometido: {curr(totalExp)}</span><span>{Math.round((totalExp/salary)*100)}% do salário</span></div></Card>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}><Lbl mb={0}>GASTOS E CONTAS</Lbl><button className="tbtn" onClick={()=>setAddingExp(v=>!v)} style={{background:"#0a2010",border:"1px solid #22c55e44",color:"#22c55e",borderRadius:7,padding:"4px 10px",fontFamily:"Cinzel,serif",fontSize:8}}>+ ADICIONAR</button></div>
+            {addingExp&&<Card style={{marginBottom:10}}><Lbl>NOVO GASTO</Lbl><div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:7}}>{["🍽️","📱","🌐","💳","🏠","🎮","💊","📚","✈️","🎵","⛽","💄"].map(ic=><button key={ic} className="tbtn" onClick={()=>setNewExpIcon(ic)} style={{fontSize:17,opacity:newExpIcon===ic?1:0.3}}>{ic}</button>)}</div><input className="inp" value={newExpName} onChange={e=>setNewExpName(e.target.value)} placeholder="Nome do gasto" style={{marginBottom:5}}/><input className="inp" value={newExpAmt} onChange={e=>setNewExpAmt(e.target.value)} type="number" placeholder="Valor (R$)" style={{marginBottom:5}}/><div style={{display:"flex",gap:5,marginBottom:9}}><input className="inp" value={newExpInst} onChange={e=>setNewExpInst(e.target.value)} type="number" placeholder="Parcela atual" style={{flex:1}}/><input className="inp" value={newExpTotal} onChange={e=>setNewExpTotal(e.target.value)} type="number" placeholder="Total parcelas" style={{flex:1}}/></div><div style={{display:"flex",gap:5}}><button className="tbtn" onClick={()=>setAddingExp(false)} style={{flex:1,padding:"9px",borderRadius:8,border:"1px solid #2a2848",color:"#666",fontFamily:"Cinzel,serif",fontSize:9}}>CANCELAR</button><button className="tbtn" onClick={addExpense} style={{flex:2,padding:"9px",borderRadius:8,background:"linear-gradient(135deg,#0a2010,#0d2a14)",border:"1px solid #22c55e55",color:"#22c55e",fontFamily:"Cinzel,serif",fontSize:10}}>✓ ADICIONAR</button></div></Card>}
+            {expenses.map(exp=><div key={exp.id} style={{background:exp.paid?"linear-gradient(135deg,#0a2010,#0d2a14)":"#0f0f1e",border:`1px solid ${exp.paid?"#22c55e44":"#1a1838"}`,borderRadius:11,padding:"11px 12px",marginBottom:6}}><div style={{display:"flex",alignItems:"center",gap:9}}><button className="tbtn" onClick={()=>togglePaid(exp.id)} style={{width:22,height:22,borderRadius:5,border:`2px solid ${exp.paid?"#22c55e":"#2a2848"}`,background:exp.paid?"#22c55e33":"transparent",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{exp.paid&&<span style={{color:"#22c55e",fontSize:11,fontWeight:900}}>✓</span>}</button><span style={{fontSize:18}}>{exp.icon}</span><div style={{flex:1}}><div style={{fontSize:13,color:exp.paid?"#aaa":"#e8dfc0",textDecoration:exp.paid?"line-through":"none"}}>{exp.name}</div><div style={{display:"flex",alignItems:"center",gap:8,marginTop:1}}>{exp.installments&&<div style={{fontSize:10,color:"#a78bfa"}}>📋 {exp.installments.current}/{exp.installments.total}x{exp.installments.current<exp.installments.total&&<button className="tbtn" onClick={()=>advanceInstallment(exp.id)} style={{marginLeft:4,fontSize:9,color:"#a78bfa",border:"1px solid #a78bfa44",borderRadius:4,padding:"1px 5px",fontFamily:"Cinzel,serif"}}>+1</button>}</div>}<span style={{fontSize:10,color:"#555"}}>+{FIN_XP(exp.amount)} XP</span></div></div><div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:4}}><span style={{fontFamily:"Cinzel,serif",fontSize:13,color:exp.paid?"#22c55e":"#e8dfc0"}}>{curr(exp.amount)}</span><button className="tbtn" onClick={()=>removeExpense(exp.id)} style={{color:"#333",fontSize:11}}>✕</button></div></div></div>)}
+          </>}
+
+          {lifeTab==="conquistas"&&<>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+              <div style={{fontFamily:"Cinzel,serif",fontSize:10,color:"#f0c040"}}>{unlockedCount}/{ACHIEVEMENTS.length} desbloqueadas</div>
+              <div style={{height:5,width:120,background:"#1a1838",borderRadius:3,overflow:"hidden"}}><div style={{height:"100%",width:`${pct(unlockedCount,ACHIEVEMENTS.length)}%`,background:"linear-gradient(90deg,#f0c04077,#f0c040)",borderRadius:3}}/></div>
+            </div>
+            {/* Category filter */}
+            <div style={{display:"flex",gap:4,marginBottom:10,flexWrap:"wrap"}}>
+              {["all","streak","estudo","questoes","treino","corrida","livros","boss","nivel"].map(c=>(
+                <button key={c} className="tbtn" onClick={()=>setAchCat(c)} style={{padding:"4px 8px",borderRadius:6,border:`1px solid ${achCat===c?"#f0c04066":"#2a2848"}`,background:achCat===c?"#1a1400":"transparent",color:achCat===c?"#f0c040":"#444",fontFamily:"Cinzel,serif",fontSize:8,letterSpacing:1}}>
+                  {c==="all"?"TODOS":c.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            {ACHIEVEMENTS.filter(a=>achCat==="all"||a.cat===achCat).map(ach=>{
+              const unlocked=(char.unlockedAch||[]).includes(ach.id);
+              return<div key={ach.id} style={{background:unlocked?"linear-gradient(135deg,#1a1000,#2a1e00)":"#0f0f1e",border:`1px solid ${unlocked?"#f0c04055":"#1a1838"}`,borderRadius:11,padding:"11px 13px",marginBottom:6,display:"flex",alignItems:"center",gap:10,opacity:unlocked?1:0.5,animation:unlocked?"none":"none"}}>
+                <div style={{fontSize:24,filter:unlocked?"none":"grayscale(1)",flexShrink:0}}>{ach.icon}</div>
+                <div style={{flex:1}}>
+                  <div style={{fontSize:13,color:unlocked?"#e8dfc0":"#666",fontFamily:unlocked?"Cinzel,serif":"inherit"}}>{ach.name}</div>
+                  <div style={{fontSize:10,color:"#555"}}>{ach.desc}</div>
+                </div>
+                <div style={{textAlign:"right",flexShrink:0}}>
+                  <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:unlocked?"#f0c040":"#333"}}>+{ach.xp} XP</div>
+                  {unlocked&&<div style={{fontSize:8,color:"#22c55e",fontFamily:"Cinzel,serif"}}>✓ DESBLOQ.</div>}
+                </div>
+              </div>;
+            })}
+          </>}
+
+          {lifeTab==="stats"&&<>
+            <STabs tabs={[{id:"xp",i:"⚡",l:"XP",c:"#f0c040"},{id:"geral",i:"📊",l:"Geral",c:"#60a5fa"}]} val={statsTab} onChange={setStatsTab}/>
+            {statsTab==="xp"&&<>
+              <Card style={{marginBottom:10}}>
+                <MiniBarChart data={last7} color="#f0c040" height={80} label="XP GANHO — ÚLTIMOS 7 DIAS"/>
+              </Card>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,marginBottom:10}}>
+                {[{l:"Total XP",v:char.totalXP.toLocaleString(),c:"#f0c040",i:"⭐"},{l:"Nível",v:cur.lv,c:cur.color,i:"⬆️"},{l:"Streak",v:`${streak}d`,c:"#f97316",i:"🔥"},{l:"Multiplier",v:`×${multi.toFixed(2)}`,c:"#a78bfa",i:"✨"}].map((s,i)=>(
+                  <Card key={i} style={{padding:"12px",textAlign:"center"}}><div style={{fontSize:20,marginBottom:4}}>{s.i}</div><div style={{fontFamily:"Cinzel,serif",fontSize:15,color:s.c,fontWeight:700}}>{s.v}</div><div style={{fontSize:9,color:"#444",letterSpacing:1,marginTop:1}}>{s.l.toUpperCase()}</div></Card>
+                ))}
+              </div>
+            </>}
+            {statsTab==="geral"&&<>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6}}>
+                {[
+                  {l:"Horas de estudo",v:`${char.stats.totalStudyHours||0}h`,c:"#60a5fa",i:"📚"},
+                  {l:"Questões",v:(char.stats.totalQuestions||0).toLocaleString(),c:"#a78bfa",i:"🎯"},
+                  {l:"Treinos",v:`${char.stats.totalWorkouts||0}x`,c:"#ef4444",i:"💪"},
+                  {l:"Km rodados",v:fmtKm(char.stats.totalKm),c:"#34d399",i:"🏃"},
+                  {l:"Livros lidos",v:`${char.stats.booksFinished||0}`,c:"#f0c040",i:"📖"},
+                  {l:"Bosses",v:`${char.stats.bossesCleared||0}`,c:"#8b5cf6",i:"👹"},
+                  {l:"Simulados",v:`${(char.simulados||[]).length}`,c:"#f97316",i:"📋"},
+                  {l:"Hábitos",v:`${(char.habits||[]).length}`,c:"#34d399",i:"🌱"},
+                ].map((s,i)=>(
+                  <Card key={i} style={{padding:"12px",textAlign:"center"}}><div style={{fontSize:20,marginBottom:4}}>{s.i}</div><div style={{fontFamily:"Cinzel,serif",fontSize:16,color:s.c,fontWeight:700}}>{s.v}</div><div style={{fontSize:8,color:"#444",letterSpacing:1,marginTop:1}}>{s.l.toUpperCase()}</div></Card>
+                ))}
+              </div>
+              <Card style={{marginTop:10}}>
+                <Lbl mb={8}>ESTUDO POR MATÉRIA (HORAS)</Lbl>
+                {subjectChartData.some(d=>d.v>0)?<div style={{display:"flex",alignItems:"flex-end",gap:3,height:60}}>
+                  {subjectChartData.map((d,i)=>{const mx2=Math.max(...subjectChartData.map(x=>x.v),0.1);return<div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2}}>
+                    <div style={{width:"100%",height:Math.max(2,(d.v/mx2)*48),background:d.v>0?d.color:"#1a1838",borderRadius:"3px 3px 0 0"}}/>
+                    <div style={{fontSize:6,color:"#444",fontFamily:"Cinzel,serif"}}>{d.l}</div>
+                  </div>;})}
+                </div>:<div style={{fontSize:11,color:"#444",textAlign:"center",padding:"10px 0"}}>Registre sessões de estudo</div>}
+              </Card>
+            </>}
+
+            {/* Export & Notif */}
+            <div style={{display:"flex",gap:6,marginTop:12}}>
+              <button className="tbtn" onClick={exportData} style={{flex:1,padding:"11px",borderRadius:10,background:"#0a2010",border:"1px solid #22c55e44",color:"#22c55e",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1}}>📥 EXPORTAR BACKUP</button>
+              <button className="tbtn" onClick={requestNotif} style={{flex:1,padding:"11px",borderRadius:10,background:"#0a0a1e",border:"1px solid #60a5fa44",color:"#60a5fa",fontFamily:"Cinzel,serif",fontSize:10,letterSpacing:1}}>🔔 NOTIFICAÇÕES</button>
+            </div>
           </>}
 
           {lifeTab==="perfil"&&<>
@@ -1228,6 +1613,7 @@ export default function App(){
             {LEVELS.map(lvl=>{const tU=timeUnlocked(lvl.months),xpOk=char.totalXP>=lvl.xp,isCur=cur.lv===lvl.lv,isPast=cur.lv>lvl.lv,uDate=unlockDate(lvl.months);return<div key={lvl.lv} style={{background:isCur?`linear-gradient(135deg,${lvl.color}18,${lvl.color}08)`:"#0f0f1e",border:`1px solid ${isCur?lvl.color+"66":isPast?"#2a2848":"#1a1838"}`,borderRadius:9,padding:"8px 12px",marginBottom:4,display:"flex",alignItems:"center",gap:9,opacity:!tU?0.4:1}}><div style={{fontFamily:"Cinzel,serif",fontWeight:900,fontSize:13,color:isPast?lvl.color:tU?"#e8dfc0":"#444",width:22,textAlign:"center",flexShrink:0}}>{isPast?"✓":tU?lvl.lv:"🔒"}</div><div style={{flex:1,minWidth:0}}><div style={{fontFamily:"Cinzel,serif",fontSize:10,color:tU?"#e8dfc0":"#444"}}>{lvl.title}</div><div style={{fontSize:9,color:"#444"}}>{lvl.xp.toLocaleString()} XP</div>{!tU&&<div style={{fontSize:8,color:"#f0c04055",fontFamily:"Cinzel,serif"}}>🔒 {uDate.toLocaleDateString("pt-BR",{month:"short",year:"numeric"})} ({daysLeft(uDate)}d)</div>}{tU&&!xpOk&&!isPast&&<div style={{fontSize:8,color:"#a78bfa77"}}>Faltam {(lvl.xp-char.totalXP).toLocaleString()} XP</div>}</div>{isCur&&<div style={{fontSize:7,fontFamily:"Cinzel,serif",color:lvl.color,border:`1px solid ${lvl.color}55`,borderRadius:4,padding:"2px 5px",flexShrink:0}}>ATUAL</div>}</div>;})}
           </>}
         </div>}
+
       </div>
 
       {/* NAV */}
