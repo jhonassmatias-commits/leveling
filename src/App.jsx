@@ -909,6 +909,7 @@ export default function App(){
     setFirstAccess(false);
     showToast(`Bem-vindo, ${onboardName.trim()}! ⚔️`,"#f0c040");
   };
+  const requestNotif=async()=>{
     if(!("Notification" in window)){showToast("Notificações não suportadas","#ef4444");return;}
     const p=await Notification.requestPermission();
     if(p==="granted"){showToast("Notificações ativadas! ✓","#22c55e");}
