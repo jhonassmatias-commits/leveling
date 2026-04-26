@@ -1737,7 +1737,7 @@ export default function App(){
 
       {/* NAV */}
       <div style={{position:"fixed",bottom:0,left:0,width:"100%",background:"#09080f",borderTop:"1px solid #181530",display:"flex",justifyContent:"space-around",padding:"6px 0 10px",zIndex:100,flexShrink:0}}>
-        {[{id:"home",i:"🏠",l:"Home"},{id:"daily",i:"⚔️",l:"Daily"},{id:"study",i:"📚",l:"Estudar"},{id:"body",i:"💪",l:"Treino"},{id:"life",i:"💎",l:"Life"}].map(t=>(
+        {[{id:"home",i:"🏠",l:"Home"},{id:"daily",i:"⚔️",l:"Daily"},{id:"study",i:"📚",l:"Estudar"},{id:"body",i:"💪",l:"Treino"},{id:"life",i:"💵",l:"Life"}].map(t=>(
           <button key={t.id} className="tbtn" onClick={()=>setTab(t.id)} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"3px 9px",borderRadius:9,background:tab===t.id?"#1a1535":"transparent",position:"relative"}}>
             {t.id==="study"&&weakSubs.length>0&&<div style={{position:"absolute",top:0,right:5,width:6,height:6,borderRadius:"50%",background:"#ef4444"}}/>}
             <div style={{fontSize:19}}>{t.i}</div>
